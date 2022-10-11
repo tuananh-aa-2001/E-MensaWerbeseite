@@ -1,47 +1,55 @@
 <!DOCTYPE html>
+<!--
+- Praktikum DBWT. Autoren:
+- Tuan,Nguyen, 3517392
+- Dorian,Hoevelmann, 3525346
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form action="formdata.html" method="post">
+<form action="/formdata.html" method="post">
     <fieldset>
         <legend>Anmeldung</legend>
         Anrede
         <br>
-        <label for="frau">Frau</label>
-        <input type="radio" id="frau">
-        <br>
-        <label for="herr">Herr</label>
-        <input type="radio" id="herr">
-        <br>
-        <br>
-        <label for="vorname">Vorname*:</label>
-        <br>
-        <input type="text" id="vorname" name="benutzer" placeholder="Bite geben Sie Ihren Vornamen ein">
-        <br>
-        <label for="nachname">Nachname*</label>
-        <br>
-        <input name="nachname" id="nachname" placeholder="Bite geben Sie Ihren Nachnamen ein">
-        <br>
-        <label for="email">E-Mail*</label>
-        <br>
-        <input name="mail" id="email" placeholder="Bite geben Sie Ihre E-Mail ein">
-        <br>
-        <label for="notification">Benachrichtigungsinterval</label>
-        <br>
-        <select id="notification" name="interval">
+        <fieldset id="group1">
+            <label for="frau">Frau</label>
+            <input type="radio" id="frau" value="frau" name="gender">
+            <label for="herr">Herr</label>
+            <input type="radio" id="herr" value="herr" name="gender">
+        </fieldset>
+        <div>
+            <label for="vorname">Vorname*:</label>
+            <br>
+            <input type="text" id="vorname" name="firstName" placeholder="Bite geben Sie Ihren Vornamen ein" required>
+        </div>
+        <div>
+            <label for="nachname">Nachname*</label>
+            <br>
+            <input type="text" id="nachname" name="lastName"  placeholder="Bite geben Sie Ihren Nachnamen ein" required>
+        </div>
+        <div>
+            <label for="email">E-Mail*</label>
+            <br>
+            <input type="text" id="email" name="mailAddress" placeholder="Bite geben Sie Ihre E-Mail ein" required>
+        </div>
+        <div>
+            <label for="notification">Benachrichtigungsinterval</label>
+            <br>
+            <select id="notification" name="interval">
             <option value="day">Tag</option>
             <option value="week">Woche</option>
             <option value="month">Monat</option>
         </select>
-        <br>
-        <input type="checkbox" id="dsgvo">
-        <label for="dsgvo">Datenschutzhinweise gelesen</label>
-        <br>
+        </div>
+        <div>
+            <label for="dsgvo">Datenschutzhinweise gelesen</label>
+            <input type="checkbox" id="dsgvo">
+        </div>
         <input type="submit" value="Abschicken">
-        <br>
         <sup>*)</sup> Eingaben sind Pflicht
     </fieldset>
 </form>
