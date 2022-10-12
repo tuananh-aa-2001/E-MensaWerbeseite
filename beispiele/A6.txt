@@ -1,0 +1,58 @@
+1)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+->Welche formate vom Browser "verstanden" werden können.
+
+Accept-Encoding: gzip, deflate, br
+->Welche Codierung der Browser "versteht".
+
+Accept-Language: en-US,en;q=0.5
+->Welche Sprache der Browser benutzt.
+
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+->Client Details (Browser und OS Version)
+
+Connection: keep-alive
+->Ob persistentes oder nicht-persistentes HTTP benutzt wird
+
+2)
+Header:
+Accept-Encoding
+	gzip, deflate, br
+Accept-Language
+	en-US,en;q=0.5
+Connection
+	keep-alive
+Content-Length
+	38
+Content-Type
+	application/x-www-form-urlencoded
+Cookie
+	username-localhost-8888="2|1:0|10:1664741498|23:username-localhost-8888|44:ZjEzZTYxYzc3ZDY2NGNmNDlmODZiZWRmNzY2MzViODg=|a78699c5452a34c7af0e089dff14c268731d73c05286217f88331352b72bf16b"; _xsrf=2|1e0bd3d2|d90944fc3a092c7bd20d39cb3ad38895|1664741466; Phpstorm-a8754ddc=aa351a50-7571-4ee8-b385-2ead72c54b23
+DNT
+	1
+Host
+	localhost:63342
+Origin
+	http://localhost:63342
+Referer
+	http://localhost:63342/E-Mensa%20Werbeseite/beispiele/newsletteranmeldung.html?_ijt=vl3p71g1ked460mdmn4nmo217s&_ij_reload=RELOAD_ON_SAVE
+Sec-Fetch-Dest
+	document
+Sec-Fetch-Mode
+	navigate
+Sec-Fetch-Site
+	same-origin
+Sec-Fetch-User
+	?1
+Upgrade-Insecure-Requests
+	1
+User-Agent
+	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+
+Body:	
+gender	"herr"
+firstName	"Dorian"
+lastName	"Hövelmann"
+mailAddress	"test@gmail.com"
+interval	"month"
+
