@@ -38,20 +38,20 @@ Cookie: username-localhost-8888="2|1:0|10:1664741498|23:username-localhost-8888|
 DNT: 1
 ->Do not track (veraltet)
 
-Host: localhost:63342
-->IP und Port an den die Request geschickt wird
+Host: localhost: 63342
+→IP und Port an den die Request geschickt wird
 
 Origin: http://localhost:63342
 ->IP und Port von dem die Request geschickt wird
 
 Referer: http://localhost:63342/E-Mensa%20Werbeseite/beispiele/newsletteranmeldung.html?_ijt=vl3p71g1ked460mdmn4nmo217s&_ij_reload=RELOAD_ON_SAVE
-->URL von dem die Request kam
+→URL von dem die Request kam
 
 Sec-Fetch-Dest: document
-->Wo und wie die geholten Daten benutzt werden
+→Wo und wie die geholten Daten benutzt werden
 
 Sec-Fetch-Mode: navigate
--> Zum differenzieren von HTTP requests benutzt: Navigieren in diesem Fall. Sonnst auch um Bilder zu laden
+-> Zum Differenzieren von HTTP requests benutzt: Navigieren in diesem Fall. Sonnst auch, um Bilder zu laden
 
 Sec-Fetch-Site: same-origin
 ->Quelle der Anfrage
