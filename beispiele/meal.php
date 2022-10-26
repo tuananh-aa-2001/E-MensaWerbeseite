@@ -1,3 +1,8 @@
+/**
+* Praktikum DBWT. Autoren:
+- Tuan,Nguyen, 3517392
+- Dorian,Hoevelmann, 3525346
+*/
 <?php
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
@@ -37,11 +42,14 @@ $ratings = [
         'stars' => 3 ]
 ];
 
+$texts = ['Bewertung' => 'Rating','Name' => 'Name','Begründung'=> 'Reason','Senden' => 'send'];
+
 $showRatings = [];
+
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (str_contains($rating['text'], $searchTerm)) {
+        if (strcasecmp($rating['text'], $searchTerm)) {
             $showRatings[] = $rating;
         }
     }
@@ -57,7 +65,7 @@ if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
 }
 
 function calcMeanStars($ratings) : float{
-    $sum = 1;
+    $sum = 0;
     foreach ($ratings as $rating) {
         $sum += $rating['stars'] / count($ratings);
     }
@@ -82,12 +90,29 @@ function calcMeanStars($ratings) : float{
     </head>
     <body>
         <h1>Gericht: <?php echo $meal['name']; ?></h1>
-        <p><?php echo $meal['description']; ?></p>
-        <h1>Bewertungen (Insgesamt: <?php echo calcMeanStars($ratings); ?>)</h1>
+        <p><?php
+            if(isset($_GET['show_description'])){
+                echo $meal['description'];
+            }else{
+                echo "There is no description for this meal.";
+            }
+            ?></p>
+        <h1>
+            <?php
+            if(isset($_GET['sprache']) && $_GET['sprache']== 'de'){
+                echo "Bewertung";
+            }else if(isset($_GET['sprache']) && $_GET['sprache']== 'en'){
+                echo $texts['Bewertung'];
+            }else{
+                echo "Bewertung";
+            }
+            ?>
+            (Insgesamt: <?php echo calcMeanStars($ratings); ?>)
+        </h1>
         <form method="get">
-            <label for="search_text">Filter:</label>
-            <input id="search_text" type="text" name="search_text">
-            <input type="submit" value="Suchen">
+            <label for="search_text" >Filter:</label>
+            <input id="search_text" type="text" name="search_text" value="<?php echo $_GET['search_text'] ?? ''; ?>">
+            <input type="submit"  value="<?php echo isset($_GET['sprache']) && $_GET['sprache']== 'de' ? 'Senden' : $texts['Senden'] ; ?>">
         </form>
         <table class="rating">
             <thead>
@@ -105,9 +130,48 @@ function calcMeanStars($ratings) : float{
                       <td class='rating_stars'>{$rating['author']}</td>
                   </tr>";
         }
-        ?>
-            <p></p>
+            ?>
             </tbody>
         </table>
+        <?php
+            echo '<ul>';
+                foreach ($meal['allergens'] as $allergien) {
+                    foreach($allergens as $index => $value){
+                        if($allergien == $index){
+                            echo '<li>'.$value."<br>\n".'</li>';
+                        }
+                    }
+                 }
+            echo '</ul>';
+
+            echo "Externer Preis : ".number_format($meal['price_extern'],2,'.','')."\xE2\x82\xAc"."<br>\n";
+            echo "Interner Preis : ".number_format($meal['price_intern'],2,'.','')."\xE2\x82\xAc"."<br>\n";
+            echo "<br>\n";
+
+            $most_star = 4;
+            $least_star = 2 ;
+            $check_bewertung = PHP_INT_MAX ;
+            if(isset($_GET['rating']) && $_GET['rating'] == "TOP"){
+                $check_bewertung = 1;
+                echo "Best-Bewertung : "."<br>\n";
+            }else if(isset($_GET['rating']) && $_GET['rating'] == "FLOPP"){
+                $check_bewertung = 0;
+                echo "Schlechteste-Bewertung : "."<br>\n";
+            }
+
+            foreach ($ratings as $rating) {
+                if($check_bewertung == 1){
+                    if($rating['stars'] >= $most_star){
+                        $most_star = $rating['stars'];
+                        echo $rating['text'].", ".$rating['stars'].",".$rating['author']."<br>\n";
+                    }
+                }else if( $check_bewertung == 0){
+                    if($rating['stars'] <= $least_star){
+                        $least_star = $rating['stars'];
+                        echo $rating['text'].", ".$rating['stars'].",".$rating['author']."<br>\n";
+                    }
+                }
+            }
+        ?>
     </body>
 </html>
