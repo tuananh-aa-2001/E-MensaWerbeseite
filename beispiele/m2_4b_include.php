@@ -1,4 +1,9 @@
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+- Tuan,Nguyen, 3517392
+- Dorian,Hoevelmann, 3525346
+ */
 include('m2_4a_standardparameter.php');
 
 echo addieren(4)."<br>\n";

@@ -13,6 +13,11 @@
     <input  type="submit" name="submit" value="Multiplizieren">
 </form>
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+- Tuan,Nguyen, 3517392
+- Dorian,Hoevelmann, 3525346
+ */
 if(isset($_POST['submit']))
 {
     $number1 = $_POST['number1'];
