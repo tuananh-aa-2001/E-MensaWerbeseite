@@ -156,7 +156,7 @@ function calcMeanStars($ratings) : float{
                 echo "Best-Bewertung : "."<br>\n";
             }else if(isset($_GET['rating']) && $_GET['rating'] == "FLOPP"){
                 $check_bewertung = 0;
-                echo "Schlechteste-Bewertung : "."<br>\n";
+                echo "Schlechteste-Bewertung :"."<br>\n";
             }
 
             foreach ($ratings as $rating) {
