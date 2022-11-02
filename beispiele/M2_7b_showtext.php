@@ -19,13 +19,13 @@
             foreach($lines as $line)
             {
                 if(str_contains($line, $search))
-                    $found_word = $line;
+                    $found_word = explode(";",$line);
             }
-
+            echo "Übersetzung: ".($found_word[1])."</br>";
             if(!empty($found_word))
-                echo "Das gesuchte Wort < ".$search. " > ist enthalten"."</br>";
+                echo "</br>"."Das gesuchte Wort < ".$_GET[GET_PARAM_FOR_SEARCH]. " > ist enthalten"."</br>";
             else
-                echo "Das gesuchte Wort < ". $search. " > ist nicht enthalten"."</br>";
+                echo "Das gesuchte Wort < ". $_GET[GET_PARAM_FOR_SEARCH]. " > ist nicht enthalten"."</br>";
             ?>
         </form>
 
