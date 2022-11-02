@@ -8,7 +8,6 @@ const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
 const GET_PARAM_LANGUAGE = 'language';
 const GET_PARAM_SHOW_DESCRIPTION ='show_description';
-const GET_PARAM_SHOW_RATING ='rating';
 
 $lang = 'DE';
 $lang = $_GET[GET_PARAM_LANGUAGE] ?? $lang;
