@@ -7,7 +7,7 @@
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
 const GET_PARAM_LANGUAGE = 'language';
-const GET_PARAM_SHOW_DESCRIPTION ='show_description';
+
 
 $lang = 'DE';
 $lang = $_GET[GET_PARAM_LANGUAGE] ?? $lang;
@@ -50,6 +50,7 @@ $ratings = [
 
 $showRatings = [];
 
+// strcasecmp: Vergleich von Zeichenketten ohne Unterscheidung von Groß- und Kleinschreibung
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
@@ -119,21 +120,16 @@ $translate_text = [
     <form method="get">
         <input type="submit" name="language" value="EN"/>
         <input type="submit" name="language" value="DE"/>
-        <?php
-
-        if(!empty($_GET[GET_PARAM_SHOW_DESCRIPTION]))
-        echo '<input type="hidden" ' . 'name="' . GET_PARAM_SHOW_DESCRIPTION . '" value="' . htmlspecialchars($_GET[GET_PARAM_SHOW_DESCRIPTION]) . '">';
-
-        if(!empty($_GET[GET_PARAM_SEARCH_TEXT]))
-        echo '<input type="hidden" ' . 'name="' . GET_PARAM_SEARCH_TEXT . '" value="' . htmlspecialchars($_GET[GET_PARAM_SEARCH_TEXT]) . '">';
-        ?>
     </form>
 
     <h1><?php echo $translate_text[$lang]['Gericht'].": ". $meal['name']; ?></h1>
 
+    <form method="get">
+        <input type="submit"  value="<?php echo $translate_text[$lang]['Beschreibung Anzeigen']; ?>" name="show"/>
+        <input type="submit"  value="<?php echo $translate_text[$lang]['Beschreibung Ausblenden'];  ?>" name="hide"/>
+    </form>
     <p>
         <?php
-
         if (isset($_GET['show']))
             echo '<h2>',$meal['description'], '</h2>';
         else if (isset($_GET['hide']))
@@ -142,43 +138,12 @@ $translate_text = [
         ?>
     </p>
 
-    <form method="get" name="show_description">
-        <input type="submit"  value="<?php echo $translate_text[$lang]['Beschreibung Anzeigen']; ?>" name="show"/>
-        <input type="submit"  value="<?php echo $translate_text[$lang]['Beschreibung Ausblenden'];  ?>" name="hide"/>
-
-        <?php
-
-        if(!empty($_GET[GET_PARAM_LANGUAGE]))
-            echo '<input type="hidden" ' . 'name="' . 'language' . '" value="' . htmlspecialchars($_GET[GET_PARAM_LANGUAGE]) . '">';
-
-        if(!empty($_GET[GET_PARAM_SHOW_DESCRIPTION]))
-            echo '<input type="hidden" ' . 'name="' . GET_PARAM_SHOW_DESCRIPTION . '" value="' . htmlspecialchars($_GET[GET_PARAM_SHOW_DESCRIPTION]) . '">';
-
-        if(!empty($_GET[GET_PARAM_SEARCH_TEXT]))
-            echo '<input type="hidden" ' . 'name="' . GET_PARAM_SEARCH_TEXT . '" value="' . htmlspecialchars($_GET[GET_PARAM_SEARCH_TEXT]) . '">';
-
-        ?>
-    </form>
-
     <h2><?php echo"{$translate_text[$lang]['Bewertungen']} ({$translate_text[$lang]['Insgesamt']} : ".calcMeanStars($ratings); ?>)</h2>
 
         <form method="get">
             <label for="search_text" >Filter:</label>
             <input id="search_text" type="text" name="search_text" value="<?php echo $_GET['search_text'] ?? ''; ?>">
             <input type="submit"  value="<?php echo $translate_text[$lang]['Suchen']?>">
-
-            <?php
-            if(!empty($_GET[GET_PARAM_LANGUAGE])) {
-                echo '<input type="hidden" ' . 'name="' . 'language' . '" value="' . htmlspecialchars($_GET[GET_PARAM_LANGUAGE]) . '">';
-            }
-
-            if(!empty($_GET[GET_PARAM_SHOW_DESCRIPTION])) {
-                echo '<input type="hidden" ' . 'name="' . GET_PARAM_SHOW_DESCRIPTION . '" value="' . htmlspecialchars($_GET[GET_PARAM_SHOW_DESCRIPTION]) . '">';
-            }
-
-            if(!empty($_GET[GET_PARAM_SEARCH_TEXT]))
-                echo '<input type="hidden" ' . 'name="' . GET_PARAM_SEARCH_TEXT . '" value="' . htmlspecialchars($_GET[GET_PARAM_SEARCH_TEXT]) . '">';
-            ?>
         </form>
         <table class="rating">
             <thead>
@@ -201,7 +166,8 @@ $translate_text = [
         </table>
 
         <?php
-           echo "Externer Preis : ".number_format($meal['price_extern'],2,'.','')."\xE2\x82\xAc"."<br>\n";
+            echo "<br>\n";
+            echo "Externer Preis : ".number_format($meal['price_extern'],2,'.','')."\xE2\x82\xAc"."<br>\n";
             echo "Interner Preis : ".number_format($meal['price_intern'],2,'.','')."\xE2\x82\xAc"."<br>\n";
             echo "<br>\n";
         ?>
