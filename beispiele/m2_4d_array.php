@@ -62,8 +62,6 @@ for ($k = 0; $k <= 21; $k++) {
                 break;
             }
         }
-        if ($count)
-            break;
     }
     if (!$count) {
         echo $beginn;
