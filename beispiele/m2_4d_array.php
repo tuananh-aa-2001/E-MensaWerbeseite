@@ -16,7 +16,6 @@ $famousMeals = [
 ];
 
 echo '<ol>';
-
 for ($index = 0; $index < count($famousMeals); $index++) {
     echo '<li>' , $famousMeals[$index + 1] ['name'] , '</li>';
     if ($index == 3 ) {
@@ -25,12 +24,11 @@ for ($index = 0; $index < count($famousMeals); $index++) {
     }
     for ($j = count($famousMeals[$index + 1]['winner']) - 1; $j >= 0;$j--) {
         echo $famousMeals[$index + 1]['winner'][$j];
-
         if ($j != count($famousMeals[$index+1]['winner']) && ($j != 0))
             echo ', ';
-
     }
 }
+echo "</p>";
 echo '</ol>';
 
 function NoWinner($array): void{
@@ -54,8 +52,6 @@ function NoWinner($array): void{
                     break;
                 }
             }
-            if ($count)
-                break;
         }
         if (!$count) {
             echo $beginn;

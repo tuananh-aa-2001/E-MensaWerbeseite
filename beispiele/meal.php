@@ -6,7 +6,6 @@
 */
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
-const GET_PARAM_SHOW_DESCRIPTION ='show_description';
 const GET_PARAM_LANGUAGE = 'sprache';
 /**
  * List of all allergens.
@@ -47,7 +46,7 @@ $showRatings = [];
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (stripos($rating['text'], $searchTerm) > 0){
+        if (strcasecmp($rating['text'], $searchTerm) > 0){
             $showRatings[] = $rating;
         }
     }
@@ -118,18 +117,14 @@ $translations = [
     </head>
     <body>
         <h1><?php echo $translations[$lang]['Gericht'].": ".$meal['name']; ?></h1>
-        <?php
-        if(!empty($_GET[GET_PARAM_SHOW_DESCRIPTION]))
-            echo '<input type="hidden" ' . 'name="' . GET_PARAM_SHOW_DESCRIPTION . '" value="' . htmlspecialchars($_GET[GET_PARAM_SHOW_DESCRIPTION]) . '">';
-        ?>
         <p>
             <?php
-
+            //Beschreibung anzeigen/verstecken
             if (isset($_GET['show']))
                 echo '<h2>',$meal['description'], '</h2>';
             else if (isset($_GET['hide']))
                 echo '<br>';
-
+            //Preis Anzeigen
             echo $translations[$lang]['Externer Preis']. ': '. number_format($meal['price_extern'], 2, '.', '') . "\xE2\x82\xAc" . "<br>\n";
             echo $translations[$lang]['Interner Preis']. ': '. number_format($meal['price_intern'], 2, '.', '') . "\xE2\x82\xAc" . "<br>\n";
             echo "<br>\n";
@@ -169,6 +164,7 @@ $translations = [
             </thead>
             <tbody>
             <?php
+            //Ausgabe der Rezessionen
         foreach ($showRatings as $rating) {
             echo "<tr><td class='rating_text'>{$rating['text']}</td>
                       <td class='rating_stars'>{$rating['stars']}</td>
@@ -181,8 +177,8 @@ $translations = [
         </table>
         <br>
         <?php
-        $max = 4;
-        $min = 2 ;
+        $max = max(array_column($ratings, 'stars'));
+        $min = min(array_column($ratings, 'stars'));
         $check_bewertung = PHP_INT_MAX ;
         if(isset($_GET['top'])){
             $check_bewertung = 1;
@@ -194,13 +190,11 @@ $translations = [
 
         foreach ($ratings as $rating) {
                 if($check_bewertung == 1){
-                    if($rating['stars'] >= $max){
-                        $most_star = $rating['stars'];
+                    if($rating['stars'] == $max){
                         echo $rating['text'].": ".$rating['stars']." ".$translations[$lang]['Sterne']." , ".$rating['author']."<br>\n";
                     }
                 }else if( $check_bewertung == 0){
-                    if($rating['stars'] <= $min){
-                        $least_star = $rating['stars'];
+                    if($rating['stars'] == $min){
                         echo $rating['text'].": ".$rating['stars']." ".$translations[$lang]['Sterne']." , ".$rating['author']."<br>\n";
                     }
                 }

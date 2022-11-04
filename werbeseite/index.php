@@ -66,9 +66,9 @@ echo "Test";
                   echo '<tr>';
                   foreach ($gerichtelemente as $key => $gerichtelement) {
                       if ($key === 0)
-                          echo '<td><img alt="Meal_Picture" width="200px" src="./img/' . htmlspecialchars($gerichtelement) . ' "></td>';
+                          echo '<td><img alt="Meal_Picture" width="200px" src="./img/' . $gerichtelement . ' "></td>';
                       else
-                          echo '<td>' . htmlspecialchars($gerichtelement) . '</td>';
+                          echo '<td>' . $gerichtelement . '</td>';
                   }
                   echo '</tr>';
               }
@@ -142,7 +142,7 @@ echo "Test";
               }else{
                   echo '<div class="error"> <ul>';
                   foreach ($errors as $error)
-                      echo '<li>'. htmlspecialchars($error).'</li>';
+                      echo '<li>'.$error.'</li>';
                   echo '</ul> </div>';
               }
           }
