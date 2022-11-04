@@ -1,4 +1,4 @@
-rindfleischwok.jpg; Rindfleisch mit Bambus, Kaiserschoten und roter Paprika, dazu Mie Nudeln; 3,50€; 6,20€
-spinatrisotto.jpg; Spinatrisotto mit kleinen Samosateigecken und gemischter Salat; 2,90€; 5,30€
-pho.jpg; Pho Ha Noi; 5,20€; 7,90€
-banhmi.jpg; Banh Mi ; 4,90€; 6,70€
+wok.jpg; Rindfleisch mit Bambus, Kaiserschoten und roter Paprika, dazu Mie Nudeln; 3,50€; 6,20€
+risotto.jpg; Spinatrisotto mit kleinen Samosateigecken und gemischter Salat; 2,90€; 5,30€
+kapana.jpg; In kleine Stücke geschnittenes Rindfleisch; 2,00€; 3,00N$
+spaghetti.jpg; Spaghetti Cacio e Pepe mit Pecorino Romano und schwarzem Pfeffer ; 3,90€; 5,70€

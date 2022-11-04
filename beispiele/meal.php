@@ -1,7 +1,13 @@
 <?php
+/**
+* Praktikum DBWT. Autoren:
+* Tuan,Nguyen, 3517392
+* Dorian,Hoevelmann, 3525346
+*/
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
-
+const GET_PARAM_SHOW_DESCRIPTION ='show_description';
+const GET_PARAM_LANGUAGE = 'sprache';
 /**
  * List of all allergens.
  */
@@ -41,7 +47,7 @@ $showRatings = [];
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (strpos($rating['text'], $searchTerm) !== false) {
+        if (stripos($rating['text'], $searchTerm) > 0){
             $showRatings[] = $rating;
         }
     }
@@ -57,19 +63,50 @@ if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
 }
 
 function calcMeanStars(array $ratings) : float{
-    $sum = 1;
+    $sum = 0;
     foreach ($ratings as $rating) {
         $sum += $rating['stars'] / count($ratings);
     }
     return $sum;
 }
+$lang = 'DE';
+$lang = $_GET[GET_PARAM_LANGUAGE] ?? $lang;
+
+$translations = [
+    'DE' => [
+        "Gericht" => "Gericht",
+        "Beschreibung Anzeigen" => "Beschreibung Anzeigen",
+        "Beschreibung Ausblenden" => "Beschreibung Ausblenden",
+        "Interner Preis" => "Interner Preis",
+        "Externer Preis" => "Externer Preis",
+        "Bewertungen" => "Bewertungen",
+        "Insgesamt" => "Insgesamt",
+        "Suchen" => "Suchen",
+        "Allergene" => "Allergene",
+        "Sterne" => "Sterne",
+        "Beste Bewertung" => "Beste Bewertung",
+        "Schlechteste Bewertung" => "Schlechteste Bewertung"],
+    'EN' => [
+        "Gericht" => "Dish",
+        "Beschreibung Anzeigen" => "Show Description",
+        "Beschreibung Ausblenden" => "Hide Description",
+        "Interner Preis" => "Price for internal customer",
+        "Externer Preis" => "Price for external customer",
+        "Bewertungen" => "Ratings",
+        "Insgesamt" => "Overall",
+        "Suchen" => "Search",
+        "Allergene" => "Allergens",
+        "Sterne" => "Stars",
+        "Beste Bewertung" => "Best Rating",
+        "Schlechteste Bewertung" => "Worst Rating"]
+];
 
 ?>
 <!DOCTYPE html>
 <html lang="de">
     <head>
         <meta charset="UTF-8"/>
-        <title>Gericht: <?php echo $meal['name']; ?></title>
+        <title><?php echo $translations[$lang]['Gericht'].": ".$meal['name']; ?></title>
         <style>
             * {
                 font-family: Arial, serif;
@@ -80,19 +117,54 @@ function calcMeanStars(array $ratings) : float{
         </style>
     </head>
     <body>
-        <h1>Gericht: <?php echo $meal['name']; ?></h1>
-        <p><?php echo $meal['description']; ?></p>
-        <h1>Bewertungen (Insgesamt: <?php echo calcMeanStars($ratings); ?>)</h1>
+        <h1><?php echo $translations[$lang]['Gericht'].": ".$meal['name']; ?></h1>
+        <?php
+        if(!empty($_GET[GET_PARAM_SHOW_DESCRIPTION]))
+            echo '<input type="hidden" ' . 'name="' . GET_PARAM_SHOW_DESCRIPTION . '" value="' . htmlspecialchars($_GET[GET_PARAM_SHOW_DESCRIPTION]) . '">';
+        ?>
+        <p>
+            <?php
+
+            if (isset($_GET['show']))
+                echo '<h2>',$meal['description'], '</h2>';
+            else if (isset($_GET['hide']))
+                echo '<br>';
+
+            echo $translations[$lang]['Externer Preis']. ': '. number_format($meal['price_extern'], 2, '.', '') . "\xE2\x82\xAc" . "<br>\n";
+            echo $translations[$lang]['Interner Preis']. ': '. number_format($meal['price_intern'], 2, '.', '') . "\xE2\x82\xAc" . "<br>\n";
+            echo "<br>\n";
+            ?>
+        </p>
+        <h1><?php echo $translations[$lang]['Allergene'].": "; ?></h1>
+        <?php
+        echo '<ul>';
+        foreach ($meal['allergens'] as $allergene) {
+            foreach($allergens as $i => $value){
+                if($allergene == $i){
+                    echo '<li>'.$value.'</li>';
+                }
+            }
+        }
+        echo '</ul>';
+        ?>
+        <h1><?php echo $translations[$lang]['Bewertungen']?> (<?php echo $translations[$lang]['Insgesamt'].":".calcMeanStars($ratings); ?>)</h1>
         <form method="get">
+            <input type="submit" name="sprache" value="EN"/>
+            <input type="submit" name="sprache" value="DE"/>
             <label for="search_text">Filter:</label>
-            <input id="search_text" type="text" name="search_text">
-            <input type="submit" value="Suchen">
+            <input id="search_text" type="text" value="<?php echo $_GET['search_text'] ?? ''; ?>" name="search_text">
+            <input type="submit" value="<?php echo $translations[$lang]['Suchen']?>">
+            <input type="submit"  value="<?php echo $translations[$lang]['Beschreibung Anzeigen']; ?>" name="show"/>
+            <input type="submit"  value="<?php echo $translations[$lang]['Beschreibung Ausblenden'];  ?>" name="hide" />
+            <input type="submit"  value="TOP" name="top"/>
+            <input type="submit"  value="FLOPP" name="flopp"/><br>
         </form>
         <table class="rating">
             <thead>
             <tr>
                 <td>Text</td>
-                <td>Sterne</td>
+                <td><?php echo $translations[$lang]['Sterne']?></td>
+                <td>Author</td>
             </tr>
             </thead>
             <tbody>
@@ -100,10 +172,39 @@ function calcMeanStars(array $ratings) : float{
         foreach ($showRatings as $rating) {
             echo "<tr><td class='rating_text'>{$rating['text']}</td>
                       <td class='rating_stars'>{$rating['stars']}</td>
+                      <td class='rating_author'>{$rating['author']}</td>
                   </tr>";
         }
         ?>
+
             </tbody>
         </table>
+        <br>
+        <?php
+        $max = 4;
+        $min = 2 ;
+        $check_bewertung = PHP_INT_MAX ;
+        if(isset($_GET['top'])){
+            $check_bewertung = 1;
+            echo $translations[$lang]['Beste Bewertung']." : "."<br>\n";
+        }else{
+            $check_bewertung = 0;
+            echo $translations[$lang]['Schlechteste Bewertung']." : "."<br>\n";
+        }
+
+        foreach ($ratings as $rating) {
+                if($check_bewertung == 1){
+                    if($rating['stars'] >= $max){
+                        $most_star = $rating['stars'];
+                        echo $rating['text'].": ".$rating['stars']." ".$translations[$lang]['Sterne']." , ".$rating['author']."<br>\n";
+                    }
+                }else if( $check_bewertung == 0){
+                    if($rating['stars'] <= $min){
+                        $least_star = $rating['stars'];
+                        echo $rating['text'].": ".$rating['stars']." ".$translations[$lang]['Sterne']." , ".$rating['author']."<br>\n";
+                    }
+                }
+            }
+        ?>
     </body>
 </html>

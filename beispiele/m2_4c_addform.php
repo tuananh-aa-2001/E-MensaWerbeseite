@@ -1,17 +1,18 @@
-<html lang >
-<body>
-<form method="post">
-    Enter First Number:
-    <label>
-        <input type="number" name="number1" />
-    </label><br><br>
-    Enter Second Number:
-    <label>
-        <input type="number" name="number2" />
-    </label><br><br>
-    <input  type="submit" name="submit" value="Addieren">
-    <input  type="submit" name="submit" value="Multiplizieren">
-</form>
+<html lang>
+    <form method = "post">
+        Nummer 1:
+        <label>
+            <input type="number" name="num1">
+        </label>
+        <br>
+        Nummer 2:
+        <label>
+            <input type="number" name="num2">
+        </label>
+        <input  type="submit" name="submit" value="Addieren">
+        <input  type="submit" name="submit" value="Multiplizieren">
+    </form>
+</html>
 <?php
 /**
  * Praktikum DBWT. Autoren:
@@ -20,13 +21,13 @@
  */
 if(isset($_POST['submit']))
 {
-    $number1 = $_POST['number1'];
-    $number2 = $_POST['number2'];
+    $number1 = $_POST['num1'];
+    $number2 = $_POST['num2'];
+    if (str_contains($_POST['submit'],"Addieren")){
     $sum =  $number1+$number2;
-    echo "The sum of $number1 and $number2 is: ".$sum."<br>\n";
+    echo "The sum of $number1 and $number2 is: ".$sum."<br>\n";}
+    else {
     $mul =  $number1*$number2;
-    echo "The mul of $number1 and $number2 is: ".$mul."<br>\n";
+    echo "The mul of $number1 and $number2 is: ".$mul."<br>\n";}
 }
 ?>
-</body>
-</html>
