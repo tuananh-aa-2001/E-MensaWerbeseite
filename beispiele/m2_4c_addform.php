@@ -20,12 +20,14 @@
  */
 if(isset($_POST['submit']))
 {
-    $number1 = $_POST['number1'];
-    $number2 = $_POST['number2'];
-    $sum =  $number1+$number2;
-    echo "The sum of $number1 and $number2 is: ".$sum."<br>\n";
-    $mul =  $number1*$number2;
-    echo "The mul of $number1 and $number2 is: ".$mul."<br>\n";
+    $number1 = $_POST['num1'];
+    $number2 = $_POST['num2'];
+    if (str_contains($_POST['submit'],"Addieren")){
+        $sum =  $number1+$number2;
+        echo "The sum of $number1 and $number2 is: ".$sum."<br>\n";}
+    else {
+        $mul =  $number1*$number2;
+        echo "The mul of $number1 and $number2 is: ".$mul."<br>\n";}
 }
 ?>
 </body>
