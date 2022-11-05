@@ -7,6 +7,6 @@
 //WRITE
 $file = fopen("accesslog.txt", "a");
 
-fwrite($file,date('m/d/Y h:i:s a', time()) . ' ' . $_SERVER['REMOTE_ADDR'] . ' ' . $_SERVER['HTTP_USER_AGENT'] . "\n");
+fwrite($file, date('d/m/Y H:i:s', time()) . ' '. $_SERVER['HTTP_USER_AGENT']. ' ' . $_SERVER['REMOTE_ADDR'] . "\n");
 
 fclose($file);
