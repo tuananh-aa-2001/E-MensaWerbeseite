@@ -54,7 +54,7 @@ $showRatings = [];
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (strcasecmp($rating['text'], $searchTerm)) {
+        if (strcasecmp($rating['text'], $searchTerm) > 0) {
             $showRatings[] = $rating;
         }
     }
@@ -190,8 +190,8 @@ $translate_text = [
         <input type="submit"  value="FLOPP" name="worst-rating"/><br>
 
         <?php
-        $most_star = 4;
-        $least_star = 2 ;
+        $max = max(array_column($ratings, 'stars'));
+        $min = min(array_column($ratings, 'stars'));
         $check_bewertung = PHP_INT_MAX ;
         if(isset($_GET['best-rating'])){
             $check_bewertung = 1;
@@ -200,16 +200,13 @@ $translate_text = [
             $check_bewertung = 0;
             echo "Schlechteste-Bewertung :"."<br>\n";
         }
-
         foreach ($ratings as $rating) {
             if($check_bewertung == 1){
-                if($rating['stars'] >= $most_star){
-                    $most_star = $rating['stars'];
+                if($rating['stars'] == $max){
                     echo $rating['text'].", ".$rating['stars'].",".$rating['author']."<br>\n";
                 }
             }else if( $check_bewertung == 0){
-                if($rating['stars'] <= $least_star){
-                    $least_star = $rating['stars'];
+                if($rating['stars'] == $min){
                     echo $rating['text'].", ".$rating['stars'].",".$rating['author']."<br>\n";
                 }
             }
