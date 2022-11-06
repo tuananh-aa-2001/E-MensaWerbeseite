@@ -55,7 +55,7 @@ if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
         if (strcasecmp($rating['text'], $searchTerm) > 0) {
-            $showRatings[] = $rating;
+                $showRatings[] = $rating;
         }
     }
 } else if (!empty($_GET[GET_PARAM_MIN_STARS])) {
