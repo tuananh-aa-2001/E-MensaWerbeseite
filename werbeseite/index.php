@@ -138,7 +138,7 @@ echo "Test";
                       $errors[] = 'Bitte geben Sie eine gültige Email ein!';
               }
               if(empty($errors)){
-                  echo  '<div class="success"> Vielen Danke. Sie haben sich erfolgreich zum Newsletter angemeldet.</div>';
+                  echo  '<div class="success"> Vielen Dank. Sie haben sich erfolgreich zum Newsletter angemeldet.</div>';
                   fwrite($file,$_POST['name'].';'.$_POST['email'].';'. $_POST['language'] . "\n");
               }else{
                   echo '<div class="error"> <ul>';
