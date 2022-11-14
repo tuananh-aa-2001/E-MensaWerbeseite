@@ -55,16 +55,16 @@ h1{
     border: 1px solid black;
 }
 #numbersMain{
-    margin-top: 10px;
-    margin-left: 200px;
-    margin-right: 200px;
-    margin-bottom: 30px;
+    margin: 10px 200px 30px;
 }
-#numbersMain>ul.zahlenList{
-    display: grid;
-    list-style-type: none;
-    grid-template-columns: 20px auto 20px auto 20px auto;
+#numbersMain ul {
+    text-align:left;
 }
+#numbersMain li {
+    display: inline-block;
+    padding: 0 7% 0 7%;
+}
+
 #contactMain{
     margin-top: 10px;
     margin-left: 200px;

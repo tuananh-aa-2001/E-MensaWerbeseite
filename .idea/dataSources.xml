@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:mariadb://149.201.88.26:3306/dbwt</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="96f32a1e-b207-45c2-a82a-c129cc55958e">
+    <data-source source="LOCAL" name="@localhost" uuid="0c4f1218-c729-465a-bcd1-8b0b91957b8d">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>

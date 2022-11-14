@@ -80,12 +80,35 @@ echo "Test";
 <div id="numbersMain">
     <h1>E-Mensa in Zahlen</h1>
     <ul class="zahlenList">
-        <li>X</li>
-        <li>Besuche</li>
-        <li>Y</li>
-        <li>Anmeldungen zum Newsletter</li>
-        <li>Z</li>
-        <li>Speisen</li>
+        <li>
+            <?php
+            session_start();
+            if(empty($_SESSION['counter']))
+                $_SESSION['counter'] = 1;
+            else
+                $_SESSION['counter']++;
+            echo $_SESSION['counter'];
+            ?> Besuche
+        </li>
+
+        <li>
+            <?php
+            $text_file = "Anmeldungsdaten.txt";
+            $lines = file($text_file);
+            $number_of_lines = count($lines);
+            echo $number_of_lines;
+            ?>
+            Anmeldungen zum Newsletter
+        </li>
+        <li>
+            <?php
+            $text_file = "Gerichte.txt";
+            $all_lines = file($text_file);
+            $number_of_lines = count($all_lines);
+            echo $number_of_lines;
+            ?>
+            Speisen
+        </li>
     </ul>
 </div>
 <div id="contactMain">

@@ -54,7 +54,7 @@ $showRatings = [];
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (strcasecmp($rating['text'], $searchTerm) > 0) {
+        if (stripos($rating['text'], $searchTerm) > 0) {
                 $showRatings[] = $rating;
         }
     }
