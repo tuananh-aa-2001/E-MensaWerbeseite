@@ -12,10 +12,12 @@
 </head>
 <body>
 <?php
-echo "Test";
+$link=mysqli_connect("localhost", // Host der Datenbank
+    "root",                 // Benutzername zur Anmeldung
+    "root",    // Passwort
+    "emensawerbeseite"      // Auswahl der Datenbanken (bzw. des Schemas)
+);
 ?>
-<!--begin header-->
-<!--to do: Links!-->
 <div id="quickLinks">
     <a class="logoimg">
         <img src="MensaLogo.png" height="100" alt="Logo">
@@ -58,22 +60,55 @@ echo "Test";
             <th>Preis extern</th>
         </tr>
         <?php
-        $file = fopen('Gerichte.txt', 'r');
-        while (!feof($file)) {
-            $gerichte = fgets($file);
-            if (!empty($gerichte)) {
-                $gerichtelemente = explode('; ', $gerichte);
-                echo '<tr>';
-                foreach ($gerichtelemente as $key => $gerichtelement) {
-                    if ($key === 0)
-                        echo '<td><img alt="Meal_Picture" width="200px" src="./img/' . $gerichtelement . ' "></td>';
-                    else
-                        echo '<td>' . $gerichtelement . '</td>';
-                }
-                echo '</tr>';
-            }
+        if (!$link) {
+            echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
+            exit();
         }
-        fclose($file);
+        $tmp_gericht = '';
+        $sql = "SELECT name, beschreibung, preis_intern, preis_extern , null, null, null, null  FROM gericht where preis_extern > 4.9 order by name";
+
+
+        $result = mysqli_query($link, $sql);
+
+        if (!$result ) {
+            echo "Fehler während der Abfrage:  ", mysqli_error($link);
+            exit();
+        }
+        while ($row = mysqli_fetch_assoc($result)) {
+            $tmp_gericht = $row['name'];
+            $sql2 = "SELECT allergen.code as code
+            from gericht join gericht_hat_allergen on gericht_hat_allergen.gericht_id = gericht.id
+            join allergen on gericht_hat_allergen.code = allergen.code
+            where gericht.name = ";
+            $sql2 .= "'";
+            $sql2 .= $tmp_gericht;
+            $sql2 .= "'";
+            $result2 = mysqli_query($link, $sql2);
+            if (!$result2 ) {
+                echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                exit();
+            }
+            $allergenLi = '';
+            while ($allergen = mysqli_fetch_assoc($result2)) {$allergenLi .= $allergen['code']." ";}
+            echo '<tr>'.'<td>'.$row['name']. '</td>' . '<td>' . $row['beschreibung']. '</td>' .'<td>'.$allergenLi.'</td>' . '<td>' . $row['preis_intern'].'</td>'. '<td>' . $row['preis_extern'].'</td>'.'</tr>';
+        }
+        ?>
+    </table>
+    <h1>Allergene</h1>
+    <table class="allergenTable">
+        <tr>
+            <th>Code</th>
+            <th>Allergen</th>
+        </tr>
+        <?php
+        $sql = "SELECT distinct allergen.code,allergen.name
+        from gericht join gericht_hat_allergen on gericht_hat_allergen.gericht_id = gericht.id
+        join allergen on gericht_hat_allergen.code = allergen.code
+        order by allergen.code";
+        $result = mysqli_query($link, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<tr>'.'<td>'.$row['code']. '</td>' .'<td>'.$row['name'].'</td>'.'</tr>';
+        }
         ?>
     </table>
 </div>
