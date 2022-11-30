@@ -1,0 +1,108 @@
+/*Begin header*/
+#quickLinks{
+    display: grid;
+    grid-template-columns: 100px 150px 100px 100px 100px 100px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+#quickLinks>a.logoimg{
+    border: 1px solid black;
+    padding-left: 8px;
+    padding-top: 5px;
+}
+#quickLinks>a.announcements{
+    margin-left: 10px;
+}
+#quickLinks>a:not(:nth-child(1)){
+    padding-left: 20px;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    font-style: italic;
+}
+#quickLinks>a:nth-child(2) {
+    border-left: 1px solid black;
+}
+#quickLinks>a:nth-child(6) {
+    border-right: 1px solid black;
+    padding-right: 150px;
+    width: 100px;
+}
+/*Begin body*/
+h1{
+    font-size: x-large;
+}
+#filler{
+    margin-top: 10px;
+    margin-left: 200px;
+}
+#announcementsMain{
+    margin-top: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+#announcementsMain>p.announcementText{
+    border: 1px solid black;
+    padding: 15px;
+}
+#mealsMain{
+    margin-top: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+#mealsMain>table, th, td{
+    border: 1px solid black;
+}
+#numbersMain{
+    margin: 10px 200px 30px;
+}
+#numbersMain ul {
+    text-align:left;
+}
+#numbersMain li {
+    display: inline-block;
+    padding: 0 7% 0 7%;
+}
+
+#contactMain{
+    margin-top: 10px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+/*to do!*/
+.contactForm p  {
+    position: relative;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.contactForm label {
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    background-color: white;
+}
+#importantMain {
+    margin-top: 10px;
+    margin-left: 200px;
+    margin-right: 200px;}
+#importantMain>ul.importantList{
+    padding-left: 150px;
+}
+#notQuiteFooter{
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+/*begin footer*/
+.unten {
+    margin-left: 3%;
+    margin-right: 3%;
+    columns: 3;
+    list-style-type: none;
+    text-align: center;
+}
+.unten>li:not(:nth-child(1)){
+    border-left: 1px solid black;
+}
