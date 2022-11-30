@@ -21,7 +21,7 @@ function valid_data(array $post):bool{
     $ename = trim($post['creator']);
     $email = trim($post['email']);
 
-    $ename = filter_var($ename, FILTER_SANITIZE_STRING);
+    $ename = filter_var($ename);
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     //if name=""
     if ($ename == "")
@@ -50,7 +50,7 @@ function valid_data(array $post):bool{
 <head>
     <title>Wunschgericht</title>
     <meta charset="utf-8">
-    <style type="text/css">
+    <style>
         body{
             display: : grid;
             grid-template-columns: 350px auto 350px;
@@ -145,7 +145,7 @@ function valid_data(array $post):bool{
              mysqli_stmt_prepare($statement_ersteller,"INSERT INTO ersteller(email, name) VALUES (?,?) ON DUPLICATE KEY UPDATE name = VALUES(name)");
              mysqli_stmt_bind_param($statement_ersteller,'ss',$email,$ersteller);
              if(mysqli_stmt_execute($statement_ersteller)){
-                 echo "Ersteller/in erfolgreich hinzugefügt." . '\n';
+                 echo "Ersteller/in erfolgreich hinzugefügt.";
              }else{
                  echo "ERROR:could not able to execute $statement_ersteller." . mysqli_error($link);
              }

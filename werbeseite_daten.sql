@@ -156,6 +156,7 @@ select name from gericht where name like 'K%';
 -- 3.8
 select id,name from gericht where name like '%suppe%';
 
+
 -- 3.9
 select * from kategorie where eltern_id is NULL;
 

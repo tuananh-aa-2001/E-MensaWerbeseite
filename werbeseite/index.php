@@ -12,11 +12,7 @@
 </head>
 <body>
 <?php
-$link=mysqli_connect("localhost", // Host der Datenbank
-    "root",                 // Benutzername zur Anmeldung
-    "root",    // Passwort
-    "emensawerbeseite"      // Auswahl der Datenbanken (bzw. des Schemas)
-);
+$link=mysqli_connect("localhost", "root", "root", "emensawerbeseite");
 ?>
 <div id="quickLinks">
     <a class="logoimg">
@@ -38,7 +34,6 @@ $link=mysqli_connect("localhost", // Host der Datenbank
         Wichtig für uns
     </a>
 </div>
-<!--begin body-->
 <div id="filler">
     <p class="randMensa">
         <img src="mensa.jpg" height="275" alt="Mensa Bild">
@@ -56,6 +51,7 @@ $link=mysqli_connect("localhost", // Host der Datenbank
         <tr>
             <th>Bild</th>
             <th>Beschreibung</th>
+            <th>Code</th>
             <th>Preis intern</th>
             <th>Preis extern</th>
         </tr>
@@ -65,7 +61,7 @@ $link=mysqli_connect("localhost", // Host der Datenbank
             exit();
         }
         $tmp_gericht = '';
-        $sql = "SELECT name, beschreibung, preis_intern, preis_extern , null, null, null, null  FROM gericht where preis_extern > 4.9 order by name";
+        $sql = "SELECT name, beschreibung, preis_intern, preis_extern FROM gericht where preis_extern > 4.9 order by name";
 
 
         $result = mysqli_query($link, $sql);
@@ -94,6 +90,15 @@ $link=mysqli_connect("localhost", // Host der Datenbank
         }
         ?>
     </table>
+    <br>
+    <form method="post" action="wunschgericht.php">
+        <div class="row">
+            <div></div>
+            <div><input type="submit" name="" value="To order the food"></div>
+            <br>
+        </div>
+    </form>
+
     <h1>Allergene</h1>
     <table class="allergenTable">
         <tr>
@@ -195,7 +200,7 @@ $link=mysqli_connect("localhost", // Host der Datenbank
                         $errors[] = 'Bitte geben Sie eine gültige Email ein!';
                 }
                 if(empty($errors)){
-                    echo  '<div class="success"> Vielen Danke. Sie haben sich erfolgreich zum Newsletter angemeldet.</div>';
+                    echo  '<div class="success"> Vielen Dank. Sie haben sich erfolgreich zum Newsletter angemeldet.</div>';
                     fwrite($file,$_POST['name'].';'.$_POST['email'].';'. $_POST['language'] . "\n");
                 }else{
                     echo '<div class="error"> <ul>';
@@ -224,7 +229,6 @@ $link=mysqli_connect("localhost", // Host der Datenbank
 </body>
 <footer>
     <div>
-        <!--begin footer-->
         <ul class="unten">
             <li>(c) E-Mensa GmbH</li>
             <li>Tuan Nguyen & Dorian Hövelmann</li>
