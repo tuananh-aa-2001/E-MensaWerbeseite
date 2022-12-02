@@ -24,14 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if(empty($errors)){
             echo  '<div class="success"> Vielen Dank. Sie haben sich erfolgreich zum Newsletter angemeldet.</div>';
-            fwrite($file,$_POST['name'].';'.$_POST['email'].';'. $_POST['language'] . "\n"):
-            header("Location: /?submit=success");
+            fwrite($file,$_POST['name'].';'.$_POST['email'].';'. $_POST['language'] . "\n");
         }else{
             echo '<div class="error"> <ul>';
             foreach ($errors as $error)
                 echo '<li>'.$error.'</li>';
             echo '</ul> </div>';
-            header("Location: /?submit=error");
         }
     }
 }

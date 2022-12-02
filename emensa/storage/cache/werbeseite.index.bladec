@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php echo $this->runChild('header'); ?>
+<?php echo $this->runChild('begruessungtext'); ?>
+<?php echo $this->runChild('fussbereich'); ?>
+<?php echo $this->runChild('gerichtuebersicht'); ?>
+<?php echo $this->runChild('refresh'); ?>
+
+ <!DOCTYPE html>
 <!--
 - Praktikum DBWT. Autoren:
 - Tuan,Nguyen, 3517392
@@ -12,8 +18,7 @@
 </head>
 <body>
 <header>
- <?php $this->startSection('header'); ?>
- <?php echo $this->yieldSection(); ?>
+ <?php echo $this->yieldContent('header'); ?>
 </header>
 
 <?php $this->startSection('begruessungtext'); ?>
@@ -58,7 +63,7 @@
 
 <div id="contactMain">
  <h1>Interesse geweckt? Wir informieren Sie!</h1>
- <form method="post" action="/index" class="contactForm">
+ <form method="post" class="contactForm">
  <fieldset>
  <p> <label for="name">Ihr Name:</label>
  <input type="text" id="name" name="name" placeholder="Vorname" required>
@@ -79,7 +84,13 @@
  <input type="checkbox" id="dsgvo">
  </p>
  <input type="submit" value="Zum Newsletter anmelden">
- <?php echo $this->runChild('registration'); ?>
+
+ <?php
+ if ($_GET['submit'] == 'success')
+ echo '<p>Vielen Dank. Sie haben sich erfolgreich zu unserem Newsletter angemeldet.</p>';
+ if ($_GET['submit'] == 'error')
+ echo '<p>Bitte geben Sie einen Namen oder eine gültige Email an!</p>';
+ ?>
  </fieldset>
  </form>
 </div>

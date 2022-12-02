@@ -1,10 +1,4 @@
-@include('header')
-@include('begruessungtext')
-@include('fussbereich')
-@include('gerichtuebersicht')
-@include('refresh')
-
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 - Praktikum DBWT. Autoren:
 - Tuan,Nguyen, 3517392
@@ -18,7 +12,8 @@
 </head>
 <body>
 <header>
-    @yield('header')
+    @section('header')
+    @show
 </header>
 
 @section('begruessungtext')
@@ -63,7 +58,7 @@
 
 <div id="contactMain">
     <h1>Interesse geweckt? Wir informieren Sie!</h1>
-    <form method="post" class="contactForm">
+    <form method="post" action="/index" class="contactForm">
         <fieldset>
             <p> <label for="name">Ihr Name:</label>
                 <input type="text" id="name" name="name" placeholder="Vorname" required>
@@ -84,13 +79,7 @@
                 <input type="checkbox" id="dsgvo">
             </p>
             <input type="submit" value="Zum Newsletter anmelden">
-
-            <?php
-            if ($_GET['submit'] == 'success')
-                echo '<p>Vielen Dank. Sie haben sich erfolgreich zu unserem Newsletter angemeldet.</p>';
-            if ($_GET['submit'] == 'error')
-                echo '<p>Bitte geben Sie einen Namen oder eine gültige Email an!</p>';
-            ?>
+            @include('registration')
         </fieldset>
     </form>
 </div>

@@ -56,9 +56,4 @@ class ExampleController
         }
     }
 
-    public function homelayout(RequestData $request): string
-    {
-        return view('werbeseite.homelayout');
-    }
-
 }

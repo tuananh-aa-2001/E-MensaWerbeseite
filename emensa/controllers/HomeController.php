@@ -6,7 +6,7 @@ class HomeController
 {
     public function index(RequestData $request): string
     {
-        return view('homelayout', [
+        return view('index', [
             'rd' => $request,
             'title' => 'Ihre E-Mensa',
             'css' => 'css/index_stylesheet.css'
@@ -17,10 +17,9 @@ class HomeController
         return view('debug');
     }
 
-    public function refresh(RequestData $request): string
-    {
-        return view('refresh', [
-            'title' => 'refresh'
+    public function wunschgericht(RequestData $request){
+        return view('wunschgericht',[
+            'title' => 'wunschgericht'
         ]);
     }
 
