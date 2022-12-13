@@ -8,7 +8,7 @@ class ExampleController
         /*
            Wenn Sie hier landen:
            bearbeiten Sie diese Action,
-           so dass Sie die Aufgabe löst
+           sodass Sie die Aufgabe löst
         */
         return view('notimplemented', [
             'request'=>$rd,

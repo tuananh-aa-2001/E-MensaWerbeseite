@@ -52,7 +52,6 @@ function valid_data(array $post):bool{
  <meta charset="utf-8">
  <style>
  body{
- display: : grid;
  grid-template-columns: 350px auto 350px;
  gap: 10px;
  font-family: Tahoma, monospace;
@@ -94,7 +93,7 @@ function valid_data(array $post):bool{
 <div class ="middle">
  <h1> Ihr Wunschgericht:</h1>
  <div class="container">
- <form action= "wunschgericht.php" method="post">
+ <form action= "wunschgericht" method="post">
  <div class="row">
  <div class="col-25">
  <label for="name">Gericht Name</label>
@@ -116,7 +115,7 @@ function valid_data(array $post):bool{
  <label for="creator">Ersteller/in</label>
  </div>
  <div class="col-75">
- <input required type="text" id="creator" name="creator" placeholder="Name des/der Erstellers/in.">
+ <input type="text" id="creator" name="creator" placeholder="Name des/der Erstellers/in.">
  </div>
  </div>
  <div class="row">

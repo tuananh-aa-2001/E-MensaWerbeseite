@@ -53,16 +53,20 @@
  exit();
  }
  $tmp_gericht = '';
- $sql = "SELECT name, beschreibung, preis_intern, preis_extern FROM gericht where preis_extern > 4.9 order by name";
-
-
+ $sql = "SELECT name,bildname,beschreibung, preis_intern, preis_extern FROM gericht where preis_extern > 4.9 order by name";
  $result = mysqli_query($link, $sql);
-
  if (!$result ) {
  echo "Fehler während der Abfrage:  ", mysqli_error($link);
  exit();
  }
  while ($row = mysqli_fetch_assoc($result)) {
+ if($row['bildname'] == NULL){
+ $bild = '<img src="img/gerichte/00_image_missing.jpg"  width="250" height="200">';
+ }
+ else{
+ $bild = '<img src="img/gerichte/' .$row['bildname'] .'" width="250" height="200" >';
+ }
+
  $tmp_gericht = $row['name'];
  $sql2 = "SELECT allergen.code as code
  from gericht join gericht_hat_allergen on gericht_hat_allergen.gericht_id = gericht.id
@@ -78,7 +82,7 @@
  }
  $allergenLi = '';
  while ($allergen = mysqli_fetch_assoc($result2)) {$allergenLi .= $allergen['code']." ";}
- echo '<tr>'.'<td>'.$row['name']. '</td>' . '<td>' . $row['beschreibung']. '</td>' .'<td>'.$allergenLi.'</td>' . '<td>' . $row['preis_intern'].'</td>'. '<td>' . $row['preis_extern'].'</td>'.'</tr>';
+ echo '<tr>'.'<td>'.$row['name']. '</td>' .'<td >'.$bild. '</td>'. '<td>' . $row['beschreibung']. '</td>' .'<td>'.$allergenLi.'</td>' . '<td>' . $row['preis_intern'].'</td>'. '<td>' . $row['preis_extern'].'</td>'.'</tr>';
  }
  ?>
  </table>

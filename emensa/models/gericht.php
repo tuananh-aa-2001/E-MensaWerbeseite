@@ -36,5 +36,22 @@ function db_gericht_name_preis_absteigend(): array{
     return $data;
 }
 
+function db_gericht_hat_allergen(): array
+{
+    $link = connectdb();
+
+    $sql = "SELECT distinct allergen.code,allergen.name
+            from gericht join gericht_hat_allergen on gericht_hat_allergen.gericht_id = gericht.id
+            join allergen on gericht_hat_allergen.code = allergen.code
+           order by allergen.code";
+    $result = mysqli_query($link, $sql);
+
+    $data = mysqli_fetch_all($result,MYSQLI_BOTH);
+
+    mysqli_close($link);
+
+    return $data;
+}
+
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ $title }}</title>
     <style>
-        li.odd{
+        li.even{
             font-weight: bold;
         }
     </style>

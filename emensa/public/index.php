@@ -22,6 +22,9 @@ try {
 // $path_to_config_db = realpath($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . CONFIG_DB);
 
 use eftec\bladeone\BladeOne;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 /* Routing Script for PHP Dev Server */
 $verbosity = VERBOSITY;
@@ -268,7 +271,7 @@ function connectdb()
     return $link;
 }
 
-function view($viewname, $viewargs = array())
+function view($viewname, $viewargs = array()): string
 {
     $views = dirname(__DIR__) . '/views';
     $cache = dirname(__DIR__) . '/storage/cache';
@@ -276,3 +279,25 @@ function view($viewname, $viewargs = array())
 
     return $blade->run($viewname, $viewargs);
 }
+
+function logger($message,$viewname, $viewargs = array()): string
+{
+    $views = dirname(__DIR__) . '/views';
+    $cache = dirname(__DIR__) . '/storage/cache';
+    $blade = new BladeOne($views, $cache, BladeOne::MODE_DEBUG);
+
+
+    $format = "[%datetime%] %channel%.[%level_name%] %message% %context% %extra%\n";
+    $streamHandler = new StreamHandler(__DIR__ . '/../storage/logs/log.txt');
+    $streamHandler->setFormatter(new LineFormatter($format, 'd-m-Y H:i:s'));
+
+    $log = new Logger('emensa');
+    $log->pusHandler($streamHandler);
+    if($message != 'Email or password is wrong.Login failed!')
+        $log->info($message);
+    else
+        $log->warning($message);
+
+    return $blade->run($viewname, $viewargs);
+}
+

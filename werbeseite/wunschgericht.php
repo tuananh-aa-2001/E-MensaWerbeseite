@@ -18,14 +18,14 @@ function db_connect() : mysqli {
 }
 
 function valid_data(array $post):bool{
-    $ename = trim($post['creator']);
+    $ename = trim($post['ersteller']);
     $email = trim($post['email']);
 
     $ename = filter_var($ename);
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     //if name=""
     if ($ename == "")
-        $_POST['creator'] = 'anonym';
+        $_POST['ersteller'] = 'anonym';
     // break if invalid entry
     $is_valid = !((substr_count($email, '@') != 1) || (substr_count($email, '.') < 1));
     if (!$is_valid)

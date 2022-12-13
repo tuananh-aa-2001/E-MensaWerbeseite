@@ -23,7 +23,7 @@ select * from ersteller;
 -- 1.6
 SELECT ID, GERICHT_NAME, BESCHREIBUNG, DATUM, EMAIL, NAME FROM wunschgericht
 INNER JOIN ersteller ON wunschgericht.erstellerID = ersteller.erstellerID
-ORDER BY datum LIMIT 5;
+ORDER BY datum desc LIMIT 5;
 
 -- 4.1
 alter table gericht_hat_kategorie add constraint unique_gericht_kategorie unique key (gericht_id,kategorie_id);
