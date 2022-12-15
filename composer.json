@@ -1,6 +1,8 @@
 {
   "require": {
     "eftec/bladeone": "^4.1",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "monolog/monolog": "^3.2",
+    "php-console/php-console": "^3.1"
   }
 }

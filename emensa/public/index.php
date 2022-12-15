@@ -4,6 +4,11 @@ const PUBLIC_DIRNAME = "public";
 const CONFIG_WEBROUTES = "/../config/web.php";
 const CONFIG_DB = "/../config/db.php";
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+use eftec\bladeone\BladeOne;
+
 // DEMO
 try {
     if (!file_exists(realpath($_SERVER['DOCUMENT_ROOT'] . "/../vendor/autoload.php"))) {
@@ -21,11 +26,6 @@ try {
 // $path_to_config_webroutes = realpath($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . CONFIG_WEBROUTES);
 // $path_to_config_db = realpath($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . CONFIG_DB);
 
-use eftec\bladeone\BladeOne;
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-
 /* Routing Script for PHP Dev Server */
 $verbosity = VERBOSITY;
 if (preg_match('/\.(?:css|js|png|jpg|jpeg|gif)$/', $_SERVER["REQUEST_URI"])) {
@@ -38,6 +38,7 @@ if (preg_match('/\.(?:css|js|png|jpg|jpeg|gif)$/', $_SERVER["REQUEST_URI"])) {
     }
     FrontController::handleRequest("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]", $_SERVER['REQUEST_METHOD'], VERBOSITY);
 }
+
 
 class RequestData
 {
@@ -280,24 +281,19 @@ function view($viewname, $viewargs = array()): string
     return $blade->run($viewname, $viewargs);
 }
 
-function logger($message,$viewname, $viewargs = array()): string
-{
+function logger($message, $viewname, $viewargs){
     $views = dirname(__DIR__) . '/views';
     $cache = dirname(__DIR__) . '/storage/cache';
-    $blade = new BladeOne($views, $cache, BladeOne::MODE_DEBUG);
-
-
-    $format = "[%datetime%] %channel%.[%level_name%] %message% %context% %extra%\n";
-    $streamHandler = new StreamHandler(__DIR__ . '/../storage/logs/log.txt');
-    $streamHandler->setFormatter(new LineFormatter($format, 'd-m-Y H:i:s'));
+    $blade = new BladeOne($views, $cache,BladeOne::MODE_DEBUG);
 
     $log = new Logger('emensa');
-    $log->pusHandler($streamHandler);
-    if($message != 'Email or password is wrong.Login failed!')
+    $log->pushHandler(new \Monolog\Handler\StreamHandler(__DIR__ . '/../storage/logs/log.txt', \Monolog\Logger::INFO));
+    if ($message != 'Email or password is wrong. Login failed!')
         $log->info($message);
     else
         $log->warning($message);
-
     return $blade->run($viewname, $viewargs);
+
+
 }
 

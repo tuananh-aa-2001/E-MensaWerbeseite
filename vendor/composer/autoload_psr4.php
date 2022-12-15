@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'eftec\\bladeone\\' => array($vendorDir . '/eftec/bladeone/lib'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'PhpConsole\\' => array($vendorDir . '/php-console/php-console/src/PhpConsole'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
 );

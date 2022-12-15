@@ -7,8 +7,8 @@
 date_default_timezone_set('Europe/Berlin');
 $date = date('Y-m-d G:i:s');
 
-$mail = "admin@emensa.example" ;
-$pass = "$2y$04$"."WbuRTYmSaNSArvAmI2JlS.WEDeYCduc8FdD0vXnX6AQIFa2aVtRyK";
+$mail = "{$email}" ;
+$pass = "{$password}";
 
 $link = mysqli_connect("localhost:3306","root","root","emensawerbeseite");
 if (!$link) {
