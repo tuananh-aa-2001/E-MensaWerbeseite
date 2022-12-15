@@ -46,7 +46,7 @@ class HomeController
 
     public function anmeldung(): string
     {
-        $vars = ['message' => $_SESSION['login_result_message']];
+        $vars = [];
         return view('anmeldung', $vars);
     }
 

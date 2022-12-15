@@ -1,4 +1,7 @@
 @extends('homelayout')
+
+@section('title', 'Ihre E-Mensa')
+
 @section('header')
     <div id="quickLinks">
         <a class="logoimg">

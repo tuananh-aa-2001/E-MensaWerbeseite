@@ -1,4 +1,7 @@
 <?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('title', 'Ihre E-Mensa'); ?>
+
 <?php $this->startSection('header'); ?>
  <div id="quickLinks">
  <a class="logoimg">
