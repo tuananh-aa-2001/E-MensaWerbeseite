@@ -2,11 +2,11 @@ use emensawerbeseite;
 
 drop procedure if exists anmeldungszaehler;
 
-create procedure anmeldungszaehler (IN id int, IN anzahlanmeldung int, IN letzteanmeldung datetime)
+create procedure anmeldungszaehler (IN email_input VARCHAR(100))
 begin
-    update benutzer set benutzer.anzahlanmeldung = benutzer.anzahlanmeldung  + anzahlanmeldung,
-                        benutzer.letzteanmeldung = letzteanmeldung where benutzer.id = id;
+    update benutzer set benutzer.anzahlanmeldung = benutzer.anzahlanmeldung  + anzahlanmeldung
+                       where benutzer.email = email_input ;
 end;
 
 select * from benutzer;
-call anmeldungszaehler(1,8,now());
+call anmeldungszaehler('admin@emensa.example');

@@ -2,10 +2,9 @@
 
 $password = 'password';
 
-$hash_default_salt = password_hash($password,PASSWORD_DEFAULT);
+$salt = "nGi27xw";
 
-$hash_variable_salt = password_hash($password,PASSWORD_DEFAULT,array('cost' => 4));
+$pass_enc = sha1($salt . $password);
 
-echo $hash_default_salt."<br>";
-echo $hash_variable_salt . "<br>";
+echo $pass_enc . "<br>";
 

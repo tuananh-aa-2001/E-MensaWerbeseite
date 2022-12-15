@@ -17,12 +17,14 @@ return array(
     '/m4_7c_gerichte' => 'ExampleController@m4_7c_gerichte',
     '/m4_7d_layout' => 'ExampleController@m4_7d_layout',
 
+
     '/anmeldung'=>'HomeController@anmeldung',
-    '/anmeldung_verifizieren'=>'HomeController@anmeldung_verifizieren',
-    '/abmeldung'=>'HomeController@abmeldung',
     '/index' => 'HomeController@index',
     '/index/wunschgericht' => 'HomeController@wunschgericht',
 
+
+    '/anmeldung_verifizieren' => 'AuthController@anmeldung_verifizieren',
+    '/abmeldung' => 'AuthController@abmeldung',
 
     // Erstes Beispiel:
     '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',

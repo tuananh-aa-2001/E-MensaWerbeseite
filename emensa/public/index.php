@@ -4,10 +4,6 @@ const PUBLIC_DIRNAME = "public";
 const CONFIG_WEBROUTES = "/../config/web.php";
 const CONFIG_DB = "/../config/db.php";
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Formatter\LineFormatter;
-use eftec\bladeone\BladeOne;
 
 // DEMO
 try {
@@ -22,6 +18,10 @@ try {
 } catch (Exception $ex) {
     echo "<code>DOCUMENT_ROOT</code><br><pre>{$_SERVER['DOCUMENT_ROOT']}</pre><code>Error</code><br><pre>" . $ex->getMessage() . "</pre>";
 }
+
+use eftec\bladeone\BladeOne;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 // $path_to_config_webroutes = realpath($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . CONFIG_WEBROUTES);
 // $path_to_config_db = realpath($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . CONFIG_DB);
@@ -96,6 +96,7 @@ class FrontController
     public static function handleRequest($url, $method = 'GET', $verbosity = 0, $configPath = CONFIG_WEBROUTES)
     {
 
+        session_start();
         if (!class_exists('eftec\bladeone\BladeOne'))
             // #ERROR
             FrontController::showErrorMessage("
@@ -281,18 +282,10 @@ function view($viewname, $viewargs = array()): string
     return $blade->run($viewname, $viewargs);
 }
 
-function logger($message, $viewname, $viewargs){
-    $views = dirname(__DIR__) . '/views';
-    $cache = dirname(__DIR__) . '/storage/cache';
-    $blade = new BladeOne($views, $cache,BladeOne::MODE_DEBUG);
-
-    $log = new Logger('emensa');
-    $log->pushHandler(new \Monolog\Handler\StreamHandler(__DIR__ . '/../storage/logs/log.txt', \Monolog\Logger::INFO));
-    if ($message != 'Email or password is wrong. Login failed!')
-        $log->info($message);
-    else
-        $log->warning($message);
-    return $blade->run($viewname, $viewargs);
+function logger(){
+    $log = new Logger('name');
+    $log->pushHandler(new StreamHandler('../storage/logs/log.txt'));
+    return $log;
 
 
 }

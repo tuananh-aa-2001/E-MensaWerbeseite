@@ -36,20 +36,18 @@ class HomeController
     }*/
     public function anmeldung_verifizieren(RequestData $request): string
     {
-        return view('anmeldung_verifizieren',[
-            'title' => 'anmeldung_verifizieren',
+        $vars = ['title' => 'anmeldung_verifizieren',
             'email' => $_POST['email'],
-            'password' => $_POST['password'],
-        ]);
+            'password' => $_POST['password']
+        ];
+
+        return view('anmeldung_verifizieren',$vars);
     }
 
-    public function anmeldung(RequestData $request): string
+    public function anmeldung(): string
     {
-        return view('anmeldung', [
-            'rd' => $request,
-            'title' => 'Anmeldung Seite',
-            'submit' => $_GET['submit']
-        ]);
+        $vars = ['message' => $_SESSION['login_result_message']];
+        return view('anmeldung', $vars);
     }
 
     /*public function anmeldung(RequestData $request): string
@@ -98,30 +96,13 @@ class HomeController
             $_SESSION['counter'] = 1;
         }
         $msg = $_SESSION['counter'];
-        return view('home_session', [
+        return view('index', [
             'rd' => $request,
             'name' => $_GET['user'],
             'msg' => $msg,
             'title' => 'Ihre E-Mensa',
             'css' => 'css/gerichte_aus_datenbank.css'
         ]);
-        session_destroy();
     }
-    /*public function abmeldung(RequestData $request): string{
-        session_destroy();
-        return logger('Logout Seite','abmeldung', [
-            'rd' => $request,
-            'title' => 'Abmeldung Seite',
-        ]);
-    }*/
-    public function abmeldung(RequestData $request): string{
-        session_destroy();
-        return view('abmeldung', [
-            'rd' => $request,
-            'title' => 'Abmeldung Seite',
-        ]);
-    }
-
-
 
 }
