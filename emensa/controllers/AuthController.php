@@ -14,9 +14,7 @@ class AuthController
         $pass_enc = sha1($salt . $pass);
 
         if ($data['passwort'] == $pass_enc) {
-            $_SESSION['login_ok'] = true;
             $_SESSION['user'] = $email;
-            $_SESSION['userID'] = $data['id'];
             $_SESSION['admin'] = $data['admin'];
             update_user($email, true);
             logger()->info('login',[$email]);
