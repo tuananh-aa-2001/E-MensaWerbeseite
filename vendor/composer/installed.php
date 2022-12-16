@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '5f10551f10fc0cc140a3b29729217d4cce3abcbd',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '5f10551f10fc0cc140a3b29729217d4cce3abcbd',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -34,15 +34,6 @@
             'reference' => '305444bc6fb6c89e490f4b34fa6e979584d7fa81',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'php-console/php-console' => array(
-            'pretty_version' => '3.1.8',
-            'version' => '3.1.8.0',
-            'reference' => 'aa1d71d4ea3dc91e126edc9aa4f3c10eb8559cff',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../php-console/php-console',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

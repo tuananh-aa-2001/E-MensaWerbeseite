@@ -16,7 +16,7 @@ class AuthController
             $_SESSION['user'] = $email;
             $_SESSION['admin'] = $data['admin'];
             update_user($email, true);
-            //logger()->info('login',[$email]);
+            logger()->info('login',[$email]);
             header('Location: /index');
         } else {
             update_user($email, false);
@@ -28,7 +28,7 @@ class AuthController
 
     public function abmeldung(): void
     {
-        logger()->info('logout', [$_SESSION['email']]);
+        //logger()->info('logout', [$_SESSION['email']]);
         session_destroy();
         header('Location: /index');
     }
