@@ -20,7 +20,7 @@ class AuthController
             header('Location: /index');
         } else {
             update_user($email, false);
-            //logger()->warning('failed login', [$email]);
+            logger()->warning('failed login', [$email]);
             $_SESSION['login_result_message'] = "Benutzername oder Passwort falsch";
             header('Location: /anmeldung');
         }
@@ -28,7 +28,7 @@ class AuthController
 
     public function abmeldung(): void
     {
-        //logger()->info('logout', [$_SESSION['email']]);
+        logger()->info('logout', [$_SESSION['email']]);
         session_destroy();
         header('Location: /index');
     }
