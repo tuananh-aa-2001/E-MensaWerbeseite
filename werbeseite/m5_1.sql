@@ -34,3 +34,5 @@ update gericht set bildname = '19_mousse.jpg' where id = 19;
 update gericht set bildname = '20_suppe.jpg' where id = 20;
 
 update benutzer set passwort = '8bef1421b7c92e27540f0bca3cfd905ec51ff458' where id = 1;
+
+update benutzer set anzahlanmeldung = 1 where id = 1;
