@@ -22,6 +22,11 @@
  <a class="important" href="#importantMain">
  Wichtig für uns
  </a>
+ <?php if($_SESSION['login_ok']): ?>
+ <a href="/abmeldung">Abmelden</a>
+ <?php else: ?>
+ <a href="/anmeldung">Anmelden</a>
+ <?php endif; ?>
  </div>
 <?php $this->stopSection(); ?>
 <?php $this->startSection('begruessungtext'); ?>

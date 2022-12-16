@@ -22,6 +22,11 @@
         <a class="important" href="#importantMain">
             Wichtig für uns
         </a>
+        @if($_SESSION['login_ok'])
+            <a href="/abmeldung">Abmelden</a>
+        @else
+            <a href="/anmeldung">Anmelden</a>
+        @endif
     </div>
 @endsection
 @section('begruessungtext')

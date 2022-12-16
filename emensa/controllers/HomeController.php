@@ -50,6 +50,14 @@ class HomeController
         return view('anmeldung', $vars);
     }
 
+    public function abmeldung(): string
+    {
+        session_destroy();
+        logger()->info('Abmeldung');
+        $vars = [];
+        return view('abmeldung', $vars);
+    }
+
     /*public function anmeldung(RequestData $request): string
     {
         if($_GET['submit'] == 'fail'){

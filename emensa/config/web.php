@@ -22,9 +22,9 @@ return array(
     '/index' => 'HomeController@index',
     '/index/wunschgericht' => 'HomeController@wunschgericht',
 
-
     '/anmeldung_verifizieren' => 'AuthController@anmeldung_verifizieren',
-    '/abmeldung' => 'AuthController@abmeldung',
+
+    '/abmeldung' => 'HomeController@abmeldung',
 
     // Erstes Beispiel:
     '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',
