@@ -1,7 +1,7 @@
 /*Begin header*/
 #quickLinks{
     display: grid;
-    grid-template-columns: 100px 150px 100px 100px 100px 100px;
+    grid-template-columns: 100px 150px 100px 100px 100px 150px 200px 200px;
     padding-bottom: 15px;
     border-bottom: 1px solid black;
 }
@@ -15,7 +15,6 @@
 }
 #quickLinks>a:not(:nth-child(1)){
     padding-left: 20px;
-    margin-top: 60px;
     padding-top: 20px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -24,10 +23,13 @@
 #quickLinks>a:nth-child(2) {
     border-left: 1px solid black;
 }
-#quickLinks>a:nth-child(6) {
+#quickLinks>a:nth-child(7) {
     border-right: 1px solid black;
     padding-right: 150px;
     width: 100px;
+}
+#quickLinks>a.anmeldung{
+    margin-right: 200px;
 }
 /*Begin body*/
 h1{

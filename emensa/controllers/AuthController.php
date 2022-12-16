@@ -10,8 +10,7 @@ class AuthController
 // Überprüfung Eingabedaten
         $_SESSION['login_result_message'] = null;
         $data = get_user($email);
-        $pass_enc = '8bef1421b7c92e27540f0bca3cfd905ec51ff458';
-        if ($data['passwort'] == $pass_enc) {
+        if ($data['passwort'] == $pass) {
             $_SESSION['login_ok'] = true;
             $_SESSION['user'] = $email;
             $_SESSION['admin'] = $data['admin'];

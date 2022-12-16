@@ -1,4 +1,5 @@
 use emensawerbeseite;
+update benutzer set benutzer.passwort = '8bef1421b7c92e27540f0bca3cfd905ec51ff458' where id=1;
 
 drop procedure if exists anmeldungszaehler;
 

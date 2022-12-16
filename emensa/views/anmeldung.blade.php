@@ -17,6 +17,7 @@
 <div>
     <h1>Anmeldung</h1>
     <h3>Email : admin@emensa.example and hashed salted pass :8bef1421b7c92e27540f0bca3cfd905ec51ff458</h3>
+    <h2>{{$_SESSION['login_result_message']}}</h2>
     <div>
         <form action="anmeldung_verifizieren" method="post">
 

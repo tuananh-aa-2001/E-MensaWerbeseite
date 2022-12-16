@@ -17,7 +17,6 @@ return array(
     '/m4_7c_gerichte' => 'ExampleController@m4_7c_gerichte',
     '/m4_7d_layout' => 'ExampleController@m4_7d_layout',
 
-
     '/anmeldung'=>'HomeController@anmeldung',
     '/index' => 'HomeController@index',
     '/index/wunschgericht' => 'HomeController@wunschgericht',

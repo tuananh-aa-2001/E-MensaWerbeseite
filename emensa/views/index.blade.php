@@ -23,9 +23,9 @@
             Wichtig für uns
         </a>
         @if($_SESSION['login_ok'])
-            <a href="/abmeldung">Abmelden</a>
+            <a class="anmeldung" href="/abmeldung">Abmelden als {{$_SESSION['user']}}</a>
         @else
-            <a href="/anmeldung">Anmelden</a>
+            <a class="anmeldung" href="/anmeldung">Anmelden</a>
         @endif
     </div>
 @endsection
