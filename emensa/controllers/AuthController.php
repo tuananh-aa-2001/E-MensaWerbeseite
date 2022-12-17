@@ -24,5 +24,4 @@ class AuthController
             header('Location: /anmeldung');
         }
     }
-
 }

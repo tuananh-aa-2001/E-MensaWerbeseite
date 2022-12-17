@@ -26,14 +26,7 @@ class HomeController
             'title' => 'wunschgericht'
         ]);
     }
-    /*public function anmeldung_verifizieren(RequestData $request): string
-    {
-        return logger('Login verify','anmeldung_verifizieren',[
-            'title' => 'anmeldung_verifizieren',
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-        ]);
-    }*/
+
     public function anmeldung_verifizieren(RequestData $request): string
     {
         $vars = ['title' => 'anmeldung_verifizieren',
@@ -57,43 +50,6 @@ class HomeController
         $vars = [];
         return view('abmeldung', $vars);
     }
-
-    /*public function anmeldung(RequestData $request): string
-    {
-        if($_GET['submit'] == 'fail'){
-            return logger('Email or password is wrong.Login failed!','anmeldung',[
-                'rd' => $request,
-                'title' => 'Anmeldung-Seite',
-                'submit' => $_GET['submit']
-            ]);
-        }else{
-            return logger('Login Seite','anmeldung',[
-                'rd' => $request,
-                'title' => 'Anmeldung-Seite',
-                'submit' => $_GET['submit']
-            ]);
-        }
-    }*/
-
-    /*public function home_session(RequestData $request): string
-    {
-        session_start();
-
-        if(isset($_SESSION['counter'])){
-            $_SESSION['counter']++;
-        }else{
-            $_SESSION['counter'] = 1;
-        }
-        $msg = $_SESSION['counter'];
-        return logger('Successfully login as'.$_GET['user'],'home_session',[
-            'rd' => $request,
-            'name' => $_GET['user'],
-            'msg' => $msg,
-            'title' => 'E-Mensa',
-            'css' => 'css/index_stylesheet.css',
-        ]);
-    }*/
-
     public function home(RequestData $request): string
     {
         session_start();
