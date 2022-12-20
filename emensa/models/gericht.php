@@ -1,7 +1,5 @@
 <?php
-/**
- * Diese Datei enthält alle SQL Statements für die Tabelle "gerichte"
- */
+
 function db_gericht_select_all(): array{
     try {
         $link = connectdb();
@@ -50,6 +48,35 @@ function db_gericht_hat_allergen(): array
 
     mysqli_close($link);
 
+    return $data;
+}
+
+function db_gericht_select_price_greater_than($preis): ?array
+{
+    $link = connectdb();
+
+    $sql = "SELECT gericht.id,gericht.name,gericht.bildname,gericht.beschreibung, GROUP_CONCAT(allergen.code) allergene ,gericht.preis_intern,gericht.preis_extern FROM
+            (allergen JOIN gericht_hat_allergen ON allergen.code=gericht_hat_allergen.code
+            JOIN gericht ON gericht_hat_allergen.gericht_id=gericht.id ) where gericht.preis_extern >".$preis.
+            "GROUP BY gericht.id;";
+
+
+    $result = mysqli_query($link, $sql);
+
+    $data = mysqli_fetch_all($result,MYSQLI_BOTH);
+    mysqli_close($link);
+
+    return $data;
+}
+
+function get_gericht_per_id($gericht_id){
+    $link = connectdb();
+
+    $sql = "SELECT id,name,bildname FROM gericht where id =". $gericht_id;
+
+    $result = mysqli_query($link, $sql);
+    $data = mysqli_fetch_all($result);
+    mysqli_close($link);
     return $data;
 }
 

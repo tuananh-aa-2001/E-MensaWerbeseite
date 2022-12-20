@@ -22,8 +22,8 @@
         <a class="important" href="#importantMain">
             Wichtig für uns
         </a>
-        @if($_SESSION['login_ok'])
-            <a class="anmeldung" href="/abmeldung">Abmelden als {{$_SESSION['user']}}</a>
+        @if(isset($_SESSION['login_ok']))
+            <a class="abmeldung" href="/abmeldung">Abmelden als {{$_SESSION['user']}}</a>
         @else
             <a class="anmeldung" href="/anmeldung">Anmelden</a>
         @endif
@@ -48,51 +48,36 @@
         <h1>Köstlichkeiten, die Sie erwarten</h1>
         <table class="mealTable">
             <tr>
+                <th>Name</th>
                 <th>Bild</th>
                 <th>Beschreibung</th>
-                <th>Code</th>
+                <th>Allergen</th>
                 <th>Preis intern</th>
                 <th>Preis extern</th>
             </tr>
-            <?php
-            $link=mysqli_connect("localhost", "root", "root", "emensawerbeseite");
-            if (!$link) {
-                echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
-                exit();
-            }
-            $tmp_gericht = '';
-            $sql = "SELECT name,bildname,beschreibung, preis_intern, preis_extern FROM gericht where preis_extern > 4.9 order by name";
-            $result = mysqli_query($link, $sql);
-            if (!$result ) {
-                echo "Fehler während der Abfrage:  ", mysqli_error($link);
-                exit();
-            }
-            while ($row = mysqli_fetch_assoc($result)) {
-                if($row['bildname'] == NULL){
-                    $bild = '<img src="img/gerichte/00_image_missing.jpg"  width="250" height="200">';
-                }
-                else{
-                    $bild = '<img src="img/gerichte/' .$row['bildname'] .'" width="250" height="200" >';
-                }
+            @foreach($gerichte as $gericht)
+                <tr>
+                    <td>{{$gericht['name']}}
+                        <br>
+                        @if(isset($_SESSION['login_ok']))
+                            <a href="/bewertung?id={{$gericht['id']}}" style='font-size: smaller'>Gericht bewerten</a>
+                        @else
+                            <a href="/anmeldung" style='font-size: smaller'>Gericht bewerten</a>
 
-                $tmp_gericht = $row['name'];
-                $sql2 = "SELECT allergen.code as code
-            from gericht join gericht_hat_allergen on gericht_hat_allergen.gericht_id = gericht.id
-            join allergen on gericht_hat_allergen.code = allergen.code
-            where gericht.name = ";
-                $sql2 .= "'";
-                $sql2 .= $tmp_gericht;
-                $sql2 .= "'";
-                $result2 = mysqli_query($link, $sql2);
-                if (!$result2 ) {
-                    echo "Fehler während der Abfrage:  ", mysqli_error($link);
-                    exit();
-                }
-                $allergenLi = '';
-                while ($allergen = mysqli_fetch_assoc($result2)) {$allergenLi .= $allergen['code']." ";}
-                echo '<tr>'.'<td>'.$row['name']. '</td>' .'<td >'.$bild. '</td>'. '<td>' . $row['beschreibung']. '</td>' .'<td>'.$allergenLi.'</td>' . '<td>' . $row['preis_intern'].'</td>'. '<td>' . $row['preis_extern'].'</td>'.'</tr>';
-            }
-            ?>
+                        @endif
+                    </td>
+                    @if($gericht['bildname'] == NULL)
+                        <td><img src="/img/gerichte/00_image_missing.jpg" width="250" height="200" ></td>
+                    @else
+                        <td><img src="/img/gerichte/{{$gericht['bildname']}}" width="250" height="200"></td>
+                    @endif
+                    <td>{{$gericht['beschreibung']}}</td>
+                    <td>{{$gericht['allergene']}}</td>
+                    <td>{{$gericht['preis_intern']}}</td>
+                    <td>{{$gericht['preis_extern']}}</td>
+                </tr>
+            @endforeach
+
         </table>
         <br>
         <form method="post" action="/index/wunschgericht">
@@ -109,16 +94,12 @@
                 <th>Code</th>
                 <th>Allergen</th>
             </tr>
-            <?php
-            $sql = "SELECT distinct allergen.code,allergen.name
-            from gericht join gericht_hat_allergen on gericht_hat_allergen.gericht_id = gericht.id
-            join allergen on gericht_hat_allergen.code = allergen.code
-           order by allergen.code";
-            $result = mysqli_query($link, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<tr>'.'<td>'.$row['code']. '</td>' .'<td>'.$row['name'].'</td>'.'</tr>';
-            }
-            ?>
+            @foreach($allergene as $allergen)
+                <tr>
+                    <td>{{$allergen['code']}}</td>
+                    <td>{{$allergen['name']}}</td>
+                </tr>
+            @endforeach
         </table>
     </div>
 @endsection

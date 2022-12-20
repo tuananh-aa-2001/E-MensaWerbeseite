@@ -1,5 +1,14 @@
 {
+    "name": "emensa/mvc",
     "require": {
-        "monolog/monolog": "^3.2"
+        "eftec/bladeone": "^4.1",
+        "monolog/monolog": "^3.2",
+        "illuminate/database": "^9.44"
+    },
+    "autoload": {
+        "classmap": [
+            "models"
+        ]
     }
+
 }

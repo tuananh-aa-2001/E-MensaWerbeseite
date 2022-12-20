@@ -14,10 +14,11 @@ try {
     }
     // file exists
     require_once realpath($_SERVER['DOCUMENT_ROOT'] . "/../vendor/autoload.php");
-
 } catch (Exception $ex) {
     echo "<code>DOCUMENT_ROOT</code><br><pre>{$_SERVER['DOCUMENT_ROOT']}</pre><code>Error</code><br><pre>" . $ex->getMessage() . "</pre>";
 }
+
+
 
 use eftec\bladeone\BladeOne;
 use Monolog\Logger;

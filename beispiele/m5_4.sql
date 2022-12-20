@@ -10,3 +10,4 @@ right join kategorie on kategorie.id = gericht_hat_kategorie.kategorie_id and ge
 order by gericht_id;
 
 select * from view_kategoriegerichte_vegetarisch;
+

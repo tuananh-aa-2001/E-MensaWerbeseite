@@ -7,6 +7,10 @@
  */
 
 return array(
+    // Erstes Beispiel:
+    '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',
+    '/m4' => 'ExampleController@m4_6a_queryparameter',
+
     "/demo"         => "DemoController@demo",
     '/dbconnect'    => 'DemoController@dbconnect',
     '/debug'        => 'HomeController@debug',
@@ -20,13 +24,13 @@ return array(
     '/anmeldung'=>'HomeController@anmeldung',
     '/index' => 'HomeController@index',
     '/index/wunschgericht' => 'HomeController@wunschgericht',
-
     '/anmeldung_verifizieren' => 'AuthController@anmeldung_verifizieren',
-
     '/abmeldung' => 'HomeController@abmeldung',
 
-    // Erstes Beispiel:
-    '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',
-    '/m4' => 'ExampleController@m4_6a_queryparameter',
+
+    '/bewertung' =>'BewertungController@bewertung',
+    '/bewertung_absenden' =>'BewertungController@bewertung_absenden',
+
+
 
 );

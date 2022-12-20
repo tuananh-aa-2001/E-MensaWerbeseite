@@ -13,6 +13,7 @@ class AuthController
         if ($data['passwort'] == $pass) {
             $_SESSION['login_ok'] = true;
             $_SESSION['user'] = $email;
+            $_SESSION['benutzerId'] = $data['id'];
             $_SESSION['admin'] = $data['admin'];
             update_user($email, true);
             logger()->info('login',[$email]);

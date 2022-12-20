@@ -6,13 +6,15 @@ class HomeController
 {
    public function index(RequestData $request): string
     {
-        $data = db_gericht_hat_allergen();
-        return view('index', [
-            'rd' => $request,
-            'title' => 'Ihre E-Mensa',
-            'css' => 'css/index_stylesheet.css',
-            'allergene' => $data
-        ]);
+        $allergen = db_gericht_hat_allergen();
+
+        $gerichte = db_gericht_select_price_greater_than(4.9);
+        $vars = [
+            'gerichte' => $gerichte,
+            'allergene' => $allergen
+        ];
+
+        return view('index',$vars);
     }
     
     public function debug(RequestData $request): string
