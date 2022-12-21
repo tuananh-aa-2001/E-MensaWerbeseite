@@ -4,17 +4,15 @@ use \Illuminate\Database\Capsule\Manager as DB;
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
-//require_once('../models/GerichtAr.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/GerichtAr.php');
 
 class BewertungController{
 
     public function bewertung(RequestData $rd): string
     {
-        $gerichtId = 10;
+        $gerichtId = $rd->query['id'];
         if($_SESSION['login_ok']){
-            //$vars = ['gericht' => GerichtAr::find($gericht_id)];
-            $gericht = get_gericht_per_id($gerichtId);
-            $vars=['gericht'=> $gericht];
+            $vars = ['gericht' => GerichtAr::find($gerichtId)];
             return view('bewertung',$vars);
         }
         $_SESSION['target'] = 'bewertung?id=' . $gerichtId;
@@ -31,15 +29,18 @@ class BewertungController{
         $bewertung = $_POST['bewertung'];
         $gericht_id = $_POST['gerichtId'];
         $hervorgehoben = 0;
+
+        date_default_timezone_set('europe/berlin');
+        $timestamp = date('Y-m-d H:i:s');
+
         if(isset($_SESSION['admin'])){
             $hervorgehoben = 1;
         }
-
         if(strlen(trim($bemerkung)) > 4){
-            db_bewertung_eintragen($bemerkung,$bewertung,$hervorgehoben,$gericht_id);
+            db_bewertung_eintragen($bemerkung,$bewertung,$timestamp,$hervorgehoben,$gericht_id);
             $erfolgsmeldung = 'Die Bewertung wurde erfolgreich hinzugefügt';
-
-            $vars = ['meldung' => $erfolgsmeldung];
+            $vars = ['gericht' => GerichtAr::find($gericht_id),
+                'meldung' => $erfolgsmeldung];
         }else{
             $fehlermeldung = 'Die Bewertung ist zu kurz';
             $vars = ['meldung' => $fehlermeldung];

@@ -82,3 +82,8 @@
 [2022-12-20T13:47:52.279800+01:00] name.INFO: login ["admin@emensa.example"] []
 [2022-12-20T14:09:43.191737+01:00] name.INFO: login ["admin@emensa.example"] []
 [2022-12-20T16:33:18.488792+01:00] name.INFO: login ["admin@emensa.example"] []
+[2022-12-20T22:29:46.988764+01:00] name.INFO: login ["admin@emensa.example"] []
+[2022-12-21T12:58:08.693902+01:00] name.INFO: login ["admin@emensa.example"] []
+[2022-12-21T12:58:38.990779+01:00] name.INFO: Abmeldung [] []
+[2022-12-21T12:59:05.630058+01:00] name.WARNING: failed login ["admin@emensa.example"] []
+[2022-12-21T12:59:52.388254+01:00] name.INFO: login ["admin@emensa.example"] []

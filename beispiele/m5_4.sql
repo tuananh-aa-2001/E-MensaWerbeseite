@@ -11,3 +11,4 @@ order by gericht_id;
 
 select * from view_kategoriegerichte_vegetarisch;
 
+

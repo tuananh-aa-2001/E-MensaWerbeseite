@@ -69,10 +69,11 @@ function db_gericht_select_price_greater_than($preis): ?array
     return $data;
 }
 
-function get_gericht_per_id($gericht_id){
+function get_gericht_per_id($gericht_id): array
+{
     $link = connectdb();
 
-    $sql = "SELECT id,name,bildname FROM gericht where id =". $gericht_id;
+    $sql = "SELECT * FROM gericht where id =". $gericht_id;
 
     $result = mysqli_query($link, $sql);
     $data = mysqli_fetch_all($result);

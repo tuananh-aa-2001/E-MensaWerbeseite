@@ -1,7 +1,8 @@
 <?php
-namespace App\Models;
 
-class GerichtAr extends Illuminate\Database\Eloquent\Model
+use Illuminate\Database\Eloquent\Model;
+
+class GerichtAr extends Model
 {
     protected $table = 'gericht';
     public $timestamps = false;

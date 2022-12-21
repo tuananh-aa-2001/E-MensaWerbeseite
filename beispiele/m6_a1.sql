@@ -1,12 +1,13 @@
 use emensawerbeseite;
 
-create table if not exists bewertung(
-    id int8 primary key auto_increment,
-    bemerkung varchar(200) not null,
-    sternebewertung enum('sehr schlecht','schlecht','gut','sehr gut'),
-    bewertungszeitpunkt datetime not null default now(),
-    hervorgehoben boolean not null default 0,
-    gerichtId  bigint not null,
-    foreign key (gerichtId) references gericht(id),
-    check (length(bemerkung > 4))
+CREATE TABLE IF NOT EXISTS bewertung(
+id INT8 PRIMARY KEY AUTO_INCREMENT,
+bemerkung VARCHAR(200) NOT NULL,
+sternebewertung ENUM('sehr schlecht', 'schlecht', 'gut', 'sehr gut'),
+bewertungszeitpunkt DATETIME NOT NULL DEFAULT NOW(),
+hervorgehoben BOOLEAN NOT NULL DEFAULT 0,
+gerichtId BIGINT NOT NULL,
+FOREIGN KEY (gerichtId) REFERENCES gericht(id),
+CHECK (LENGTH(bemerkung)>4)
 );
+

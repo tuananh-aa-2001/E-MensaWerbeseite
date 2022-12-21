@@ -14,6 +14,7 @@ try {
     }
     // file exists
     require_once realpath($_SERVER['DOCUMENT_ROOT'] . "/../vendor/autoload.php");
+    require_once realpath($_SERVER['DOCUMENT_ROOT'] . "/../config/orm.php");
 } catch (Exception $ex) {
     echo "<code>DOCUMENT_ROOT</code><br><pre>{$_SERVER['DOCUMENT_ROOT']}</pre><code>Error</code><br><pre>" . $ex->getMessage() . "</pre>";
 }
@@ -287,7 +288,5 @@ function logger(){
     $log = new Logger('name');
     $log->pushHandler(new StreamHandler('../storage/logs/log.txt'));
     return $log;
-
-
 }
 

@@ -5,8 +5,12 @@
     <link rel="stylesheet" type="text/css">
 </head>
 <body>
-<h2>Bewertung für {{$gericht['name']}}, {{$gericht['id']}}</h2>
-
+<h2>Bewertung für {{$gericht->name}}</h2>
+<span class="fehlerausgabe">
+            @if(isset($meldung))
+        {{$meldung}} <br>
+    @endif
+        </span>
 <div>
     @if($gericht['bildname'] == NULL)
         <td><img src="/img/gerichte/00_image_missing.jpg" width="250" height="200"></td>
@@ -20,19 +24,14 @@
         <label id="bewertung"> Bitte die Bewertung angeben: </label>
         <!-- <input list="bewertung"  name="bewertung_form" id="bewertung_form" placeholder="Bitte auswählen"> <br>-->
         <select id="bewertung" name="bewertung">
-            <option value="4">Sehr gut</option>
-            <option value="3">Gut</option>
-            <option value="2">Schlecht</option>
-            <option value="1">Sehr schlecht</option>
+            <option value="sehr gut">Sehr gut</option>
+            <option value="gut">Gut</option>
+            <option value="schlecht">Schlecht</option>
+            <option value="sehr schlecht">Sehr schlecht</option>
         </select><br>
-        <span class="fehlerausgabe">
-            @if(isset($meldung))
-                {{$meldung}} <br>
-            @endif
-        </span>
         <br>
         <input type="submit" style="width: 80px;" value="Absenden">
-        <input type='hidden' name='gerichtId' value='{{$gericht['id']}}'/>
+        <input type='hidden' name='gerichtId' value='{{$gericht->id}}'/>
     </form>
 </div>
 </body>
