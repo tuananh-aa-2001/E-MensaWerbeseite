@@ -11,3 +11,4 @@ end;
 
 select * from benutzer;
 call anmeldungszaehler('admin@emensa.example');
+

@@ -29,6 +29,8 @@ return array(
 
 
     '/bewertung' =>'BewertungController@bewertung',
+    '/bewertungen' =>'BewertungController@bewertungen',
+    '/meinebewertungen' =>'BewertungController@meinebewertungen',
     '/bewertung_absenden' =>'BewertungController@bewertung_absenden',
 
 

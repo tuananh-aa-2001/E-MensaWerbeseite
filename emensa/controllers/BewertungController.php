@@ -5,6 +5,7 @@ use \Illuminate\Database\Capsule\Manager as DB;
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/GerichtAr.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/BewertungAr.php');
 
 class BewertungController{
 
@@ -19,8 +20,29 @@ class BewertungController{
         return view('anmeldung', NULL);
     }
 
-    public function bewertungen(RequestData $rd)
+    public function bewertungen(RequestData $rd): string
     {
+        if(isset($rd->query['h']) && $_SESSION['admin']){
+            $hv = Bewertung::find($rd->query['h']);
+            $hv->hervorgehoben ^= 1;
+            $hv->save();
+        }
+        $bewertungen = BewertungAr::orderBy('bewertungszeitpunkt','DESC')->get()->take(30);
+        $vars = ['bewertungen'=> $bewertungen];
+        return view('bewertungen',$vars);
+    }
+
+    public function meinebewertungen(RequestData $rd): string
+    {
+        if($_POST['bewertungId']!=NULL) {
+            $bw = BewertungAr::where('id', $_POST['bewertungId'])->where('benutzerId', $_SESSION['benutzerId']);
+            $bw->delete();
+        }
+        if($_SESSION['login_ok']){
+            $vars = ['bewertungen' => get_bewertungen_by_userId($_SESSION['benutzerId'])];
+            return view('meinebewertungen',$vars);
+        }
+        return view('anmeldung', NULL);
     }
 
     public function bewertung_absenden(): string
