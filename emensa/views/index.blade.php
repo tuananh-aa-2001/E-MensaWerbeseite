@@ -55,7 +55,7 @@
                 <th>Preis intern</th>
                 <th>Preis extern</th>
             </tr>
-            @foreach($gerichte as $gericht)
+            @foreach($gerichte as $key=>$gericht)
                 <tr>
                     <td>{{$gericht['name']}}
                         <br>
@@ -73,8 +73,8 @@
                     @endif
                     <td>{{$gericht['beschreibung']}}</td>
                     <td>{{$gericht['allergene']}}</td>
-                    <td>{{$gericht['preis_intern']}}</td>
-                    <td>{{$gericht['preis_extern']}}</td>
+                    <td>{{$preis_intern[$key]}}</td>
+                    <td>{{$preis_extern[$key]}}</td>
                 </tr>
             @endforeach
 
@@ -102,6 +102,22 @@
             @endforeach
         </table>
     </div>
+
+    <h2>Meinungen unserer Gäste</h2>
+    <table style="width:100%">
+        @foreach($bewertungen as $bewertung)
+            <tr>
+                <td>
+                    <br>
+                    Gericht: {{$bewertung['name']}} <br>
+                    Bewertung: {{$bewertung['sternebewertung']}}<br>
+                    Bemerkung: {{$bewertung['bemerkung']}}<br>
+                    <br>
+                </td>
+            </tr>
+        @endforeach
+    </table>
+
 @endsection
 
 @section('fussbereich')

@@ -17,14 +17,14 @@
         Bewertung: {{$bewertung['sternebewertung']}} <br>
         Bemerkung: {{$bewertung['bemerkung']}} <br>
         Datum: {{$bewertung['bewertungszeitpunkt']}}<br>
-    </div>
-    @if($_SESSION['admin'])
-        @if($bewertung['hervorgehoben'])
-            <a href="/bewertungen?hl={{$bewertung['id']}}">Hervorhebung abwählen</a>
-        @else
-            <a href="/bewertungen?hl={{$bewertung['id']}}">Hervorheben</a>
+        @if($_SESSION['admin'])
+            @if($bewertung['hervorgehoben'])
+                <a href="/bewertungen?hl={{$bewertung['id']}}">Hervorhebung abwählen</a>
+            @else
+                <a href="/bewertungen?hl={{$bewertung['id']}}">Hervorheben</a>
+            @endif
         @endif
-    @endif
+    </div>
     <hr>
 @endforeach
 </body>

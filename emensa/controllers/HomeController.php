@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/GerichtAr.php');
 /* Datei: controllers/HomeController.php */
 class HomeController
 {
@@ -11,7 +12,10 @@ class HomeController
         $gerichte = db_gericht_select_price_greater_than(4.9);
         $vars = [
             'gerichte' => $gerichte,
-            'allergene' => $allergen
+            'allergene' => $allergen,
+            'bewertungen' => anzeigen_bewertungen_mit_hervorgehoben(),
+            'preis_intern' => GerichtAr::take(4)->pluck('preis_intern'),
+            'preis_extern' => GerichtAr::take(4)->pluck('preis_extern')
         ];
 
         return view('index',$vars);

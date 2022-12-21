@@ -22,8 +22,8 @@ class BewertungController{
 
     public function bewertungen(RequestData $rd): string
     {
-        if(isset($rd->query['h']) && $_SESSION['admin']){
-            $hv = Bewertung::find($rd->query['h']);
+        if(isset($rd->query['hl']) && $_SESSION['admin']){
+            $hv = BewertungAr::find($rd->query['hl']);
             $hv->hervorgehoben ^= 1;
             $hv->save();
         }
@@ -34,7 +34,7 @@ class BewertungController{
 
     public function meinebewertungen(RequestData $rd): string
     {
-        if($_POST['bewertungId']!=NULL) {
+        if($_POST!=NULL) {
             $bw = BewertungAr::where('id', $_POST['bewertungId'])->where('benutzerId', $_SESSION['benutzerId']);
             $bw->delete();
         }
@@ -50,16 +50,11 @@ class BewertungController{
         $bemerkung  = $_POST['bewertungstext'];
         $bewertung = $_POST['bewertung'];
         $gericht_id = $_POST['gerichtId'];
-        $hervorgehoben = 0;
-
         date_default_timezone_set('europe/berlin');
         $timestamp = date('Y-m-d H:i:s');
 
-        if(isset($_SESSION['admin'])){
-            $hervorgehoben = 1;
-        }
         if(strlen(trim($bemerkung)) > 4){
-            db_bewertung_eintragen($bemerkung,$bewertung,$timestamp,$hervorgehoben,$gericht_id);
+            db_bewertung_eintragen($bemerkung,$bewertung,$timestamp,$gericht_id,$_SESSION['benutzerId']);
             $erfolgsmeldung = 'Die Bewertung wurde erfolgreich hinzugefügt';
             $vars = ['gericht' => GerichtAr::find($gericht_id),
                 'meldung' => $erfolgsmeldung];

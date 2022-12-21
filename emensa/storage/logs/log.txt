@@ -99,3 +99,6 @@
 [2022-12-21T20:31:32.432602+01:00] name.INFO: login ["admin@emensa.example"] []
 [2022-12-21T20:31:34.735596+01:00] name.INFO: Abmeldung [] []
 [2022-12-21T20:32:00.078155+01:00] name.INFO: login ["admin@emensa.example"] []
+[2022-12-21T21:23:36.586217+01:00] name.INFO: login ["admin@emensa.example"] []
+[2022-12-21T21:25:16.140138+01:00] name.INFO: login ["admin@emensa.example"] []
+[2022-12-21T22:12:13.231854+01:00] name.INFO: login ["admin@emensa.example"] []
