@@ -13,7 +13,7 @@ create table benutzer(
 );
 -- 5.1.3
 insert into benutzer(name,email,passwort,admin,anzahlanmeldung)
-values ('admin','admin@emensa.example','$2y$04$WbuRTYmSaNSArvAmI2JlS.WEDeYCduc8FdD0vXnX6AQIFa2aVtRyK',true,'1');
+values ('admin','admin@emensa.example','8bef1421b7c92e27540f0bca3cfd905ec51ff458',true,'1');
 
 -- 5.2.1
 alter table gericht add bildname varchar(200) default null;

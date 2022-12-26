@@ -1,18 +1,24 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../models/GerichtAr.php');
 /* Datei: controllers/HomeController.php */
 class HomeController
 {
    public function index(RequestData $request): string
     {
-        $data = db_gericht_hat_allergen();
-        return view('index', [
-            'rd' => $request,
-            'title' => 'Ihre E-Mensa',
-            'css' => 'css/index_stylesheet.css',
-            'allergene' => $data
-        ]);
+        $allergen = db_gericht_hat_allergen();
+
+        $gerichte = db_gericht_select_price_greater_than(4.9);
+        $vars = [
+            'gerichte' => $gerichte,
+            'allergene' => $allergen,
+            'bewertungen' => anzeigen_bewertungen_mit_hervorgehoben(),
+            'preis_intern' => GerichtAr::take(4)->pluck('preis_intern'),
+            'preis_extern' => GerichtAr::take(4)->pluck('preis_extern')
+        ];
+
+        return view('index',$vars);
     }
     
     public function debug(RequestData $request): string
@@ -26,14 +32,7 @@ class HomeController
             'title' => 'wunschgericht'
         ]);
     }
-    /*public function anmeldung_verifizieren(RequestData $request): string
-    {
-        return logger('Login verify','anmeldung_verifizieren',[
-            'title' => 'anmeldung_verifizieren',
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-        ]);
-    }*/
+
     public function anmeldung_verifizieren(RequestData $request): string
     {
         $vars = ['title' => 'anmeldung_verifizieren',
@@ -57,43 +56,6 @@ class HomeController
         $vars = [];
         return view('abmeldung', $vars);
     }
-
-    /*public function anmeldung(RequestData $request): string
-    {
-        if($_GET['submit'] == 'fail'){
-            return logger('Email or password is wrong.Login failed!','anmeldung',[
-                'rd' => $request,
-                'title' => 'Anmeldung-Seite',
-                'submit' => $_GET['submit']
-            ]);
-        }else{
-            return logger('Login Seite','anmeldung',[
-                'rd' => $request,
-                'title' => 'Anmeldung-Seite',
-                'submit' => $_GET['submit']
-            ]);
-        }
-    }*/
-
-    /*public function home_session(RequestData $request): string
-    {
-        session_start();
-
-        if(isset($_SESSION['counter'])){
-            $_SESSION['counter']++;
-        }else{
-            $_SESSION['counter'] = 1;
-        }
-        $msg = $_SESSION['counter'];
-        return logger('Successfully login as'.$_GET['user'],'home_session',[
-            'rd' => $request,
-            'name' => $_GET['user'],
-            'msg' => $msg,
-            'title' => 'E-Mensa',
-            'css' => 'css/index_stylesheet.css',
-        ]);
-    }*/
-
     public function home(RequestData $request): string
     {
         session_start();

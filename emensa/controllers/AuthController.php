@@ -7,12 +7,15 @@ class AuthController
     {
         $email = $_POST['email'] ?? false;
         $pass = $_POST['password'] ?? false;
-// Überprüfung Eingabedaten
+        $salt = "nGi27xw";
+        $pass_enc = sha1($salt . $pass);
+        // Überprüfung Eingabedaten
         $_SESSION['login_result_message'] = null;
         $data = get_user($email);
-        if ($data['passwort'] == $pass) {
+        if ($data['passwort'] == $pass_enc) {
             $_SESSION['login_ok'] = true;
             $_SESSION['user'] = $email;
+            $_SESSION['benutzerId'] = $data['id'];
             $_SESSION['admin'] = $data['admin'];
             update_user($email, true);
             logger()->info('login',[$email]);
