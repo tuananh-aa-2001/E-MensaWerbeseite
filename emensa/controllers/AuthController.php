@@ -19,7 +19,8 @@ class AuthController
             $_SESSION['admin'] = $data['admin'];
             update_user($email, true);
             logger()->info('login',[$email]);
-            header('Location: /index');
+            $target = $_SESSION['target'];
+            header('Location: /'. $target);
         } else {
             update_user($email, false);
             logger()->warning('failed login', [$email]);

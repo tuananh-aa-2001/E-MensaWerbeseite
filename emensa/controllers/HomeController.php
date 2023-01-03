@@ -8,7 +8,7 @@ class HomeController
    public function index(RequestData $request): string
     {
         $allergen = db_gericht_hat_allergen();
-
+        $_SESSION['target'] = "index";
         $gerichte = db_gericht_select_price_greater_than(4.9);
         $vars = [
             'gerichte' => $gerichte,

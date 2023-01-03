@@ -28,6 +28,7 @@ class BewertungController{
             $hv->save();
         }
         $bewertungen = BewertungAr::orderBy('bewertungszeitpunkt','DESC')->get()->take(30);
+        $_SESSION['target'] = "bewertungen";
         $vars = ['bewertungen'=> $bewertungen];
         return view('bewertungen',$vars);
     }
@@ -42,6 +43,7 @@ class BewertungController{
             $vars = ['bewertungen' => get_bewertungen_by_userId($_SESSION['benutzerId'])];
             return view('meinebewertungen',$vars);
         }
+        $_SESSION['target'] = 'meinebewertungen';
         return view('anmeldung', NULL);
     }
 
