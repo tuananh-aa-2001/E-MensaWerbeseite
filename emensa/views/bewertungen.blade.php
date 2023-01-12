@@ -16,7 +16,7 @@
     <hr>
     <p
             @if($bewertung['hervorgehoben'])
-                style="font-weight: bold"
+                class="hervorgehoben", style="font-weight: bold"
             @endif
     >
         Gericht: {{$bewertung->gericht['name']}}<br>

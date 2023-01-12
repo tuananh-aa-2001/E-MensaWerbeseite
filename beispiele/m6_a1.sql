@@ -11,4 +11,4 @@ FOREIGN KEY (gerichtId) REFERENCES gericht(id),
 CHECK (LENGTH(bemerkung)>4)
 );
 
-alter table bewertung add column benutzerId bigint not null;
+-- alter table bewertung add column benutzerId bigint not null;
